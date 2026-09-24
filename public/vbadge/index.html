@@ -341,10 +341,29 @@
       menu: 5, b: 6, a: 7, y: 8, x: 9, start: 12,
       right: 1, left: 2, down: 3, up: 4,
     };
+    // Directional buttons must also drive the analog joy_x/joy_y axes (not
+    // just the digital bits): apps that read the joystick position directly
+    // (e.g. games) ignore the digital bits, so the D-pad has to fake a full
+    // deflection while held, like dragging the Fri3d skin's joystick nub.
+    var DPAD_AXIS = {
+      right: { axis: 'joy_x', value: 4095 }, left: { axis: 'joy_x', value: 0 },
+      down: { axis: 'joy_y', value: 4095 }, up: { axis: 'joy_y', value: 0 },
+    };
     document.querySelectorAll('.pad-button').forEach(function (btn) {
-      var bit = BUTTON_BITS[btn.dataset.button];
-      function down(e) { e.preventDefault(); btn.classList.add('pressed'); webio.buttons |= (1 << bit); }
-      function up() { btn.classList.remove('pressed'); webio.buttons &= ~(1 << bit); }
+      var name = btn.dataset.button;
+      var bit = BUTTON_BITS[name];
+      var axis = DPAD_AXIS[name];
+      function down(e) {
+        e.preventDefault();
+        btn.classList.add('pressed');
+        webio.buttons |= (1 << bit);
+        if (axis) webio[axis.axis] = axis.value;
+      }
+      function up() {
+        btn.classList.remove('pressed');
+        webio.buttons &= ~(1 << bit);
+        if (axis) webio[axis.axis] = 2048;
+      }
       btn.addEventListener('pointerdown', down);
       btn.addEventListener('pointerup', up);
       btn.addEventListener('pointerleave', up);
