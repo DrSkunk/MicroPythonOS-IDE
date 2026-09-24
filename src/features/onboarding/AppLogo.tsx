@@ -1,25 +1,19 @@
-/** Placeholder wordmark until dedicated MicroPythonOS IDE artwork exists. */
+/**
+ * The MicroPythonOS project's ouroboros mark (MIT licensed, from
+ * https://github.com/QuasiKili/MPOS-logo), reused here so the IDE shares the
+ * upstream MicroPythonOS project's visual identity instead of an invented one.
+ */
 export function AppLogo({ size = 72, className = '' }: { size?: number; className?: string }) {
     return (
         <svg
-            viewBox="0 0 72 72"
+            viewBox="0 0 1200 1200"
             width={size}
             height={size}
             className={className}
+            fill="currentColor"
             aria-hidden
         >
-            <rect x="2" y="2" width="68" height="68" rx="12" fill="currentColor" className="text-(--brand-purple)" />
-            <text
-                x="36"
-                y="44"
-                textAnchor="middle"
-                fontFamily="ui-rounded, system-ui, sans-serif"
-                fontWeight="900"
-                fontSize="30"
-                fill="#ffffff"
-            >
-                μ
-            </text>
+            <path d="M1082.316,600c0,266.197 -216.118,482.316 -482.316,482.316c-266.197,0 -482.316,-216.118 -482.316,-482.316c0,-266.197 216.118,-482.316 482.316,-482.316c40.043,0 78.953,4.89 116.164,14.106c37.951,-18.526 93.314,-19.492 148.131,1.209c78.844,29.775 120.586,127.255 118.169,147.975c-2.417,20.72 -101.4,-53.656 -132.671,-23.653c-22.302,21.397 1.649,79.482 -8.74,92.671c-7.552,9.588 -35.575,-6.732 -53.592,-13.536c-49.592,-18.728 -87.797,-51.059 -106.648,-85.92c-25.976,-5.992 -53.028,-9.159 -80.813,-9.159c-197.929,0 -358.622,160.693 -358.622,358.622c0,197.929 160.693,358.622 358.622,358.622c197.929,0 358.622,-160.693 358.622,-358.622c0,-77.508 -24.434,-234.995 -3.819,-234.995c8.222,0 127.574,71.818 127.512,234.995Zm-243.774,-427.688c-10.041,9.634 -10.323,25.603 -0.63,35.639c9.693,10.036 25.715,10.363 35.756,0.729c10.041,-9.634 10.323,-25.603 0.63,-35.639c-9.693,-10.036 -25.715,-10.363 -35.756,-0.729Z" />
         </svg>
     )
 }

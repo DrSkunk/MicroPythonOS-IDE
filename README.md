@@ -112,3 +112,5 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for architecture, project structure, test
 ## Origin
 
 MicroPythonOS IDE started as Fri3d-IDE, forked from the excellent [ViperIDE](https://github.com/vshymanskyy/ViperIDE) project by [Volodymyr Shymanskyy](https://github.com/vshymanskyy).
+
+The app icon and logo mark are the MicroPythonOS project's ouroboros symbol, from [QuasiKili/MPOS-logo](https://github.com/QuasiKili/MPOS-logo) (MIT licensed).

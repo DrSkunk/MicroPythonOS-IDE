@@ -23,6 +23,9 @@ All notable user-facing changes to MicroPythonOS IDE (formerly Fri3d-IDE).
   generic MicroPythonOS look (colors, borders, shadows, and button/dialog
   corner radius). This is a manual choice in Settings, independent of the
   device workspace and color theme (light/dark).
+- **Real MicroPythonOS logo** — the app icon and Welcome page logo now use
+  the upstream MicroPythonOS project's ouroboros mark instead of a
+  placeholder, including the favicon, PWA icons, and Apple touch icon.
 
 ## v1.2.4 — 2026-08-14
 
