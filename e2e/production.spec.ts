@@ -3,7 +3,10 @@ import { expect, test, type Page, type Request } from '@playwright/test'
 const BADGEHUB_AUTH_CONSOLE_ERRORS = [
     'Failed to load resource: the server responded with a status of 403',
     'Keycloak init failed',
+    /^Refused to display 'https:\/\/keycloak\.badgehub\.eu\/' in a frame because it set 'X-Frame-Options' to 'sameorigin'\.$/,
 ]
+
+type AllowedConsoleError = string | RegExp
 
 interface BrowserProblems {
     consoleErrors: string[]
@@ -45,7 +48,7 @@ function welcomeTab(page: Page) {
 
 function expectNoBrowserProblems(
     problems: BrowserProblems,
-    allowedConsoleErrors: string[] = [],
+    allowedConsoleErrors: AllowedConsoleError[] = [],
     allowedPageErrors: string[] = [],
 ): void {
     expect(
@@ -53,7 +56,9 @@ function expectNoBrowserProblems(
         'uncaught browser exceptions',
     ).toEqual([])
     expect(
-        problems.consoleErrors.filter((error) => !allowedConsoleErrors.some((allowed) => error.includes(allowed))),
+        problems.consoleErrors.filter((error) => !allowedConsoleErrors.some((allowed) =>
+            typeof allowed === 'string' ? error.includes(allowed) : allowed.test(error),
+        )),
         'browser console errors',
     ).toEqual([])
     expect(problems.failedAssets, 'failed document, JavaScript, or stylesheet requests').toEqual([])
@@ -190,6 +195,7 @@ test('virtual device starts in the production shell', async ({ page }) => {
         'mpos.imu.drivers.iio:Error listing dir',
         'Starting very limited asyncio REPL task',
         'could not mark this update as valid: no module named',
+        /^\[vbadge stderr\] \d+:WARNING:mpos\.main:refresh_apps took \d+ ms$/,
     ])
 })
 
