@@ -31,15 +31,6 @@ All notable user-facing changes to MicroPythonOS IDE (formerly Fri3d-IDE).
   the upstream MicroPythonOS project's ouroboros mark instead of a
   placeholder, including the favicon, PWA icons, and Apple touch icon.
 
-### Fixed
-
-- **Generic device D-pad not moving in-app joystick input** — the new
-  D-pad's directional buttons only toggled the digital direction bits and
-  left the emulated analog joystick centered, so apps that read the
-  joystick axes directly (e.g. games) ignored D-pad presses. The D-pad now
-  also drives the analog joy_x/joy_y axes while held, matching the Fri3d
-  skin's joystick behavior.
-
 ## v1.2.4 — 2026-08-14
 
 ### Improved
