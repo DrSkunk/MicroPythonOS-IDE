@@ -100,14 +100,14 @@ export function createTourSteps(task: OnboardingTask | null, t: Translate): Tour
             connection,
             {
                 key: 'apps',
-                title: t('onboarding.steps.apps.title', 'Explore the virtual badge'),
+                title: t('onboarding.steps.apps.title', 'Explore the virtual device'),
                 text: t('onboarding.steps.apps.text', 'Open an installed app or use the terminal and file browser to explore.'),
                 selectors: ['[data-tour-id="tour-app-list"]'],
                 menuTab: 'apps',
             },
             {
                 key: 'done',
-                title: t('onboarding.success-virtual-title', 'Virtual badge running!'),
+                title: t('onboarding.success-virtual-title', 'Virtual device running!'),
                 text: t('onboarding.success-virtual', 'You can now experiment without changing a physical badge.'),
             },
         ]

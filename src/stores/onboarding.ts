@@ -1,9 +1,9 @@
 import { create } from 'zustand'
 
-export const CREATE_APP_GUIDE_CANCELLED_EVENT = 'fri3d:onboarding:create-app-cancelled'
-export const CREATE_APP_GUIDE_COMPLETED_EVENT = 'fri3d:onboarding:create-app-completed'
-export const BADGEHUB_GUIDE_CANCELLED_EVENT = 'fri3d:onboarding:badgehub-cancelled'
-export const BADGEHUB_GUIDE_INSTALLED_EVENT = 'fri3d:onboarding:badgehub-installed'
+export const CREATE_APP_GUIDE_CANCELLED_EVENT = 'mpos-ide:onboarding:create-app-cancelled'
+export const CREATE_APP_GUIDE_COMPLETED_EVENT = 'mpos-ide:onboarding:create-app-completed'
+export const BADGEHUB_GUIDE_CANCELLED_EVENT = 'mpos-ide:onboarding:badgehub-cancelled'
+export const BADGEHUB_GUIDE_INSTALLED_EVENT = 'mpos-ide:onboarding:badgehub-installed'
 
 interface OnboardingStore {
     guidedCreateApp: boolean

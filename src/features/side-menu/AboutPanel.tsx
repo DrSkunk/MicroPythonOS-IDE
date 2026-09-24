@@ -3,6 +3,7 @@ import { ClipboardCopy, ScrollText } from 'lucide-react'
 import { toast } from 'sonner'
 import { createDiagnosticsReport } from '../../services/diagnostics'
 import { openChangelogTab } from '../../services/changelog.service'
+import { useActiveDeviceKind } from '../../stores/deviceKind'
 
 function buildDate(): string {
     try {
@@ -14,6 +15,7 @@ function buildDate(): string {
 
 export function AboutPanel() {
     const { t } = useTranslation()
+    const activeDeviceKind = useActiveDeviceKind()
     const copyDiagnostics = async () => {
         try {
             await navigator.clipboard.writeText(createDiagnosticsReport())
@@ -26,9 +28,12 @@ export function AboutPanel() {
     }
     return (
         <div className="min-h-0 flex-1 overflow-y-auto px-3 py-6 text-center">
-            <div className="mt-2 font-heading text-xl font-black">Fri3d-IDE</div>
+            <div className="mt-2 font-heading text-xl font-black">MicroPythonOS IDE</div>
             <div className="text-sm opacity-80">{VIPER_IDE_VERSION}</div>
             <div className="text-xs opacity-60">build {buildDate()}</div>
+            <div className="mx-auto mt-2 inline-block border-2 border-black bg-menu px-2 py-0.5 text-xs font-semibold">
+                {t(`device-kind.${activeDeviceKind}`, activeDeviceKind)}
+            </div>
             <button
                 type="button"
                 className="mx-auto mt-2 flex items-center gap-1.5 text-sm text-fg-highlight underline"
@@ -53,15 +58,15 @@ export function AboutPanel() {
                     Volodymyr Shymanskyy
                 </a>.</p>
 
-            <p>Adapted into Fri3d-IDE by{' '}
+            <p>Adapted into MicroPythonOS IDE by{' '}
                 <a className="text-fg-highlight underline" href="https://www.sebastiaanjansen.be/" target="_blank" rel="noreferrer">Sebastiaan Jansen</a>
             </p>
             <hr className="my-4 border-black/30" />
             <p className="text-sm">
-                {t('about.cta-pre', 'If you like Fri3d-IDE, please')}{' '}
+                {t('about.cta-pre', 'If you like MicroPythonOS IDE, please')}{' '}
                 <a
                     className="text-fg-highlight underline"
-                    href="https://github.com/Fri3dCamp/Fri3d-IDE"
+                    href="https://github.com/DrSkunk/MicroPythonOS-IDE"
                     target="_blank"
                     rel="noreferrer"
                 >
@@ -72,7 +77,7 @@ export function AboutPanel() {
             <p className="mt-2 text-sm">
                 <a
                     className="text-fg-highlight underline"
-                    href="https://github.com/Fri3dCamp/Fri3d-IDE/issues"
+                    href="https://github.com/DrSkunk/MicroPythonOS-IDE/issues"
                     target="_blank"
                     rel="noreferrer"
                 >

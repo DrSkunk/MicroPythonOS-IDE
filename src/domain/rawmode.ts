@@ -162,7 +162,7 @@ with open('${fn}','rb') as f:
             return result;
         }
         // Temp file in the SAME directory as the target: cross-directory rename
-        // fails on some VFS implementations (e.g. wasm virtual badge, errno 75).
+        // fails on some VFS implementations (e.g. wasm virtual device, errno 75).
         const dest = direct ? fn : `${fn}.viper.tmp`
         const fnLiteral = JSON.stringify(fn)
         const destLiteral = JSON.stringify(dest)
@@ -240,6 +240,29 @@ print('|'.join(str(x) for x in d))
         mpy_sub = parseInt(mpy_sub, 10)
         if (!mpy_ver) { mpy_ver = 'py' }
         return { machine, release, sysname, version, mpy_arch, mpy_ver, mpy_sub, sys_path }
+    }
+
+    /** Probe for MicroPythonOS and, if present, its hardware id (e.g.
+     *  "fri3d_2026" on the Fri3d Camp 2026 badge). Returns `null` when the
+     *  `mpos` module isn't importable (plain MicroPython), or `''` when
+     *  `mpos` is present but the hardware id is unknown/unrecognized. Never
+     *  throws — any Python-side error is treated as "no mpos". */
+    async getMposHardwareId(): Promise<string | null> {
+        try {
+            const rsp = await this.exec(`
+try:
+ from mpos import DeviceInfo
+ print(DeviceInfo.get_hardware_id() or '')
+except ImportError:
+ print('__no_mpos__')
+except Exception:
+ print('')
+`)
+            const out = rsp.trim()
+            return out === '__no_mpos__' ? null : out
+        } catch (_err) {
+            return null
+        }
     }
 
 

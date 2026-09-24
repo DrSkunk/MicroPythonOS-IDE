@@ -45,7 +45,7 @@
             "color-theme": "Tema"
         },
         "about": {
-            "cta": "Om du gillar Fri3d-IDE, vänligen ge det en stjärna på GitHub ⭐ och sprid ordet på sociala medier 📢",
+            "cta": "Om du gillar MicroPythonOS IDE, vänligen ge det en stjärna på GitHub ⭐ och sprid ordet på sociala medier 📢",
             "report-bug": "Du kan också rapportera ett fel 🐞"
         },
         "editor": {
@@ -101,16 +101,16 @@
             "get-started": "Kom igång! 🚀",
             "steps": {
                 "welcome": {
-                    "title": "Välkommen till Fri3d-IDE! 👋",
-                    "text": "Hej! Jag är din Fri3d-guide. Låt mig ge dig en snabb rundtur så att du kan börja koda direkt!"
+                    "title": "Välkommen till MicroPythonOS IDE! 👋",
+                    "text": "Hej! Jag är din guide. Låt mig ge dig en snabb rundtur så att du kan börja koda direkt!"
                 },
                 "toolbar": {
                     "title": "Huvudverktygsfält",
-                    "text": "Det här är ditt huvudverktygsfält. Spara filer, kör din kod på badget och anslut din Fri3d-enhet härifrån."
+                    "text": "Det här är ditt huvudverktygsfält. Spara filer, kör din kod på badget och anslut din enhet härifrån."
                 },
                 "connect": {
                     "title": "Anslut via USB",
-                    "text": "Klicka på den här knappen för att ansluta ditt Fri3d-badge via USB/Seriell. Du kan också använda Bluetooth 🦷 eller WebREPL 🌐!"
+                    "text": "Klicka på den här knappen för att ansluta ditt badge via USB/Seriell. Du kan också använda Bluetooth 🦷 eller WebREPL 🌐!"
                 },
                 "side-menu": {
                     "title": "Sidomeny",
@@ -130,7 +130,7 @@
                 },
                 "done": {
                     "title": "Allt är klart! 🚀",
-                    "text": "Det var rundturen! Anslut ditt Fri3d-badge och börja bygga fantastiska saker. Trevlig kodning!"
+                    "text": "Det var rundturen! Anslut ditt badge och börja bygga fantastiska saker. Trevlig kodning!"
                 }
             }
         }

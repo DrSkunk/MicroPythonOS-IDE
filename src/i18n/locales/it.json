@@ -45,7 +45,7 @@
             "color-theme": "Tema"
         },
         "about": {
-            "cta": "Se ti piace Fri3d-IDE, per favore dagli una stella su GitHub ⭐ e spargi la voce sui social media 📢",
+            "cta": "Se ti piace MicroPythonOS IDE, per favore dagli una stella su GitHub ⭐ e spargi la voce sui social media 📢",
             "report-bug": "Puoi anche segnalare un bug 🐞"
         },
         "editor": {
@@ -101,16 +101,16 @@
             "get-started": "Iniziamo! 🚀",
             "steps": {
                 "welcome": {
-                    "title": "Benvenuto in Fri3d-IDE! 👋",
-                    "text": "Ciao! Sono la tua guida Fri3d. Lasciami fare un breve tour per farti iniziare a programmare subito!"
+                    "title": "Benvenuto in MicroPythonOS IDE! 👋",
+                    "text": "Ciao! Sono la tua guida. Lasciami fare un breve tour per farti iniziare a programmare subito!"
                 },
                 "toolbar": {
                     "title": "Barra degli strumenti principale",
-                    "text": "Questa è la tua barra degli strumenti principale. Salva file, esegui il codice sul badge e connetti il tuo dispositivo Fri3d da qui."
+                    "text": "Questa è la tua barra degli strumenti principale. Salva file, esegui il codice sul badge e connetti il tuo dispositivo da qui."
                 },
                 "connect": {
                     "title": "Connetti tramite USB",
-                    "text": "Clicca questo pulsante per connettere il tuo badge Fri3d tramite USB/Seriale. Puoi anche usare Bluetooth 🦷 o WebREPL 🌐!"
+                    "text": "Clicca questo pulsante per connettere il tuo badge tramite USB/Seriale. Puoi anche usare Bluetooth 🦷 o WebREPL 🌐!"
                 },
                 "side-menu": {
                     "title": "Menu laterale",
@@ -130,7 +130,7 @@
                 },
                 "done": {
                     "title": "Tutto pronto! 🚀",
-                    "text": "Questo è il tour! Connetti il tuo badge Fri3d e inizia a costruire cose fantastiche. Buona programmazione!"
+                    "text": "Questo è il tour! Connetti il tuo badge e inizia a costruire cose fantastiche. Buona programmazione!"
                 }
             }
         }

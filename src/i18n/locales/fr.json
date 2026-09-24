@@ -45,7 +45,7 @@
             "color-theme": "Thème"
         },
         "about": {
-            "cta": "Si vous aimez Fri3d-IDE, veuillez lui donner une étoile sur GitHub ⭐ et en parler sur les réseaux sociaux 📢",
+            "cta": "Si vous aimez MicroPythonOS IDE, veuillez lui donner une étoile sur GitHub ⭐ et en parler sur les réseaux sociaux 📢",
             "report-bug": "Vous pouvez aussi signaler un bug 🐞"
         },
         "editor": {
@@ -101,16 +101,16 @@
             "get-started": "C'est parti ! 🚀",
             "steps": {
                 "welcome": {
-                    "title": "Bienvenue dans Fri3d-IDE ! 👋",
-                    "text": "Bonjour ! Je suis ton guide Fri3d. Laisse-moi te faire une visite rapide pour que tu puisses commencer à coder tout de suite !"
+                    "title": "Bienvenue dans MicroPythonOS IDE ! 👋",
+                    "text": "Bonjour ! Je suis ton guide. Laisse-moi te faire une visite rapide pour que tu puisses commencer à coder tout de suite !"
                 },
                 "toolbar": {
                     "title": "Barre d'outils principale",
-                    "text": "C'est ta barre d'outils principale. Enregistre des fichiers, exécute ton code sur le badge et connecte ton appareil Fri3d depuis ici."
+                    "text": "C'est ta barre d'outils principale. Enregistre des fichiers, exécute ton code sur le badge et connecte ton appareil depuis ici."
                 },
                 "connect": {
                     "title": "Connecter via USB",
-                    "text": "Clique sur ce bouton pour connecter ton badge Fri3d via USB/Série. Tu peux aussi utiliser Bluetooth 🦷 ou WebREPL 🌐 !"
+                    "text": "Clique sur ce bouton pour connecter ton badge via USB/Série. Tu peux aussi utiliser Bluetooth 🦷 ou WebREPL 🌐 !"
                 },
                 "side-menu": {
                     "title": "Menu latéral",
@@ -130,7 +130,7 @@
                 },
                 "done": {
                     "title": "Tout est prêt ! 🚀",
-                    "text": "C'est la fin de la visite ! Connecte ton badge Fri3d et commence à créer des choses incroyables. Bon codage !"
+                    "text": "C'est la fin de la visite ! Connecte ton badge et commence à créer des choses incroyables. Bon codage !"
                 }
             }
         }

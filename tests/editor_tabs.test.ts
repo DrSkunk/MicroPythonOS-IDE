@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-const RECOVERY_KEY = 'fri3d-ide-editor-recovery-v1'
+const RECOVERY_KEY = 'mpos-ide-editor-recovery-v1'
 
 describe('editor tab recovery', () => {
     beforeEach(() => {

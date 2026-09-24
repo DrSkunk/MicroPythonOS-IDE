@@ -256,7 +256,7 @@ export function ConnectDeviceButton() {
                 type="button"
                 disabled={connecting}
                 onClick={() => connect('usb')}
-                className="flex w-full items-center justify-center gap-2 border-2 border-black bg-(--fri3d-purple) px-3 py-2 font-semibold text-white shadow-brutal transition-transform hover:brightness-110 active:translate-x-1 active:translate-y-1 active:shadow-none disabled:opacity-60"
+                className="flex w-full items-center justify-center gap-2 border-2 border-black bg-(--brand-purple) px-3 py-2 font-semibold text-white shadow-brutal transition-transform hover:brightness-110 active:translate-x-1 active:translate-y-1 active:shadow-none disabled:opacity-60"
             >
                 {connecting ? (
                     <Loader2 size={16} className="animate-spin" aria-hidden />
@@ -269,7 +269,7 @@ export function ConnectDeviceButton() {
             </button>
             <button type="button" disabled={connecting} onClick={() => connect('vm')} className={secondaryClass}>
                 <MonitorSmartphone size={15} aria-hidden />
-                {t('tool.conn.vm', 'Connect to virtual badge')}
+                {t('tool.conn.vm', 'Connect to virtual device')}
             </button>
             <button
                 type="button"

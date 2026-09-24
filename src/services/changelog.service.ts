@@ -1,7 +1,7 @@
 import changelogText from '../../CHANGELOG.md?raw'
 import { useEditorTabsStore } from '../stores/editorTabs'
 
-const CHANGELOG_SEEN_KEY = 'fri3d-ide-changelog-seen'
+const CHANGELOG_SEEN_KEY = 'mpos-ide-changelog-seen'
 
 /** Open (or re-activate) the changelog as a read-only markdown tab. */
 export function openChangelogTab(): void {

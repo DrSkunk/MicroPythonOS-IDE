@@ -38,3 +38,33 @@ describe('MpRawMode upload paths', () => {
         expect(exec.mock.calls[1][0]).toContain(`os.rename("/data/kid's-app/main.py.viper.tmp","/data/kid's-app/main.py")`)
     })
 })
+
+describe('MpRawMode.getMposHardwareId', () => {
+    it('returns null when mpos is not importable (plain MicroPython)', async () => {
+        const raw = Object.create(MpRawMode.prototype) as MpRawMode
+        vi.spyOn(raw, 'exec').mockResolvedValue('__no_mpos__\n')
+
+        await expect(raw.getMposHardwareId()).resolves.toBeNull()
+    })
+
+    it('returns the hardware id reported by mpos.DeviceInfo', async () => {
+        const raw = Object.create(MpRawMode.prototype) as MpRawMode
+        vi.spyOn(raw, 'exec').mockResolvedValue('fri3d_2026\n')
+
+        await expect(raw.getMposHardwareId()).resolves.toBe('fri3d_2026')
+    })
+
+    it('returns an empty string when mpos has no recognized hardware id', async () => {
+        const raw = Object.create(MpRawMode.prototype) as MpRawMode
+        vi.spyOn(raw, 'exec').mockResolvedValue('\n')
+
+        await expect(raw.getMposHardwareId()).resolves.toBe('')
+    })
+
+    it('treats any exec failure as "no mpos" instead of throwing', async () => {
+        const raw = Object.create(MpRawMode.prototype) as MpRawMode
+        vi.spyOn(raw, 'exec').mockRejectedValue(new Error('Timeout'))
+
+        await expect(raw.getMposHardwareId()).resolves.toBeNull()
+    })
+})

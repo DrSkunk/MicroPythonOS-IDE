@@ -42,14 +42,14 @@ interface EditorTabsStore {
 let tabSeq = 0
 const newId = () => `tab-${++tabSeq}`
 
-const RECOVERY_KEY = 'fri3d-ide-editor-recovery-v1'
+const RECOVERY_KEY = 'mpos-ide-editor-recovery-v1'
 const RECOVERY_MAX_BYTES = 2 * 1024 * 1024
 
 /** Boilerplate of the pre-Welcome-tab auto-created scratch tab. It was born
  *  dirty, so every past visitor has it in recovery; drop it unedited so the
  *  Welcome tab can appear. */
 const LEGACY_SCRATCH_CONTENT = [
-    '# Fri3d-IDE - MicroPython Web IDE',
+    '# MicroPythonOS IDE - MicroPython Web IDE',
     '# Read more: https://fri3dcamp.github.io/badge_2026/',
     '',
     '# Connect your device and start creating! 🤖👨‍💻🕹️',

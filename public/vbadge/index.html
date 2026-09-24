@@ -9,7 +9,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#000000">
-  <title>Fri3d Camp 2026 Virtual Badge</title>
+  <title>MicroPythonOS Virtual Device</title>
   <style>
     /* ---- Tuning knobs ------------------------------------------------ */
     /* Layout uses the silkscreen SVG coordinate system (viewBox 119x54 mm).
@@ -63,25 +63,37 @@
     body:not(.popout) #install-btn { right: 8px; }
     #install-btn.available { display: block; }
 
-    /* Badge body: fixed 119x54 mm PCB with silkscreen overlay. */
+    /* Badge/device body: shared control layout (screen, joystick, ABXY,
+       menu/start, LED strip); the skin (chosen via ?skin=) only changes the
+       bezel chrome below — Fri3d Badge 2026 gets its PCB silkscreen, the
+       generic MicroPythonOS skin gets a plain bezel. Both reuse the same
+       119x54 mm coordinate system and DOM ids/button data-attributes, so
+       the JS bridge below never needs to know which skin is active. */
     #badge {
       position: relative;
       width: calc(var(--u) * 119);
       height: calc(var(--u) * 54);
-      background: #411657;
-      border: 2px solid #e8a6a0;
       border-radius: calc(var(--u) * 4);
       user-select: none;
       -webkit-user-select: none;
       touch-action: none;
     }
-    /* Silkscreen artwork layer: above PCB colour, below screen/controls. */
-    #badge::before {
+    /* Fri3d Badge 2026 skin: PCB colour + silkscreen artwork overlay. */
+    body[data-skin="fri3d-badge-2026"] #badge {
+      background: #411657;
+      border: 2px solid #e8a6a0;
+    }
+    body[data-skin="fri3d-badge-2026"] #badge::before {
       content: '';
       position: absolute;
       inset: 0;
       background: url('../badge_silkscreen.svg') center / 100% 100% no-repeat;
       pointer-events: none;
+    }
+    /* Generic MicroPythonOS skin: plain bezel, no photoreal artwork. */
+    body[data-skin="micropythonos"] #badge {
+      background: #2b2b30;
+      border: 2px solid #55555c;
     }
     /* Children paint above the silkscreen, centered on SVG mm coords. */
     #badge > * {
@@ -133,6 +145,11 @@
       box-shadow: 0 2px 0 rgba(0,0,0,.35);
       color: #d4a017; font: bold 13px system-ui;
     }
+    body[data-skin="micropythonos"] .pad-button {
+      background: #3a3a40;
+      border-color: #55555c;
+      color: #e6e6ea;
+    }
     .pad-button:active, .pad-button.pressed {
       background: #2a2a2a;
       box-shadow: 0 0 8px 2px rgba(255, 255, 255, .25);
@@ -163,7 +180,16 @@
     }
   </style>
 </head>
-<body>
+<body data-skin="fri3d-badge-2026">
+  <script>
+    // Skin (bezel chrome) is chosen once via ?skin=; DOM ids/button
+    // data-attributes are identical across skins, so nothing else here
+    // needs to know which one is active. Defaults to the Fri3d Badge 2026
+    // skin above for continuity with existing users.
+    if (new URLSearchParams(location.search).get('skin') === 'micropythonos') {
+      document.body.dataset.skin = 'micropythonos';
+    }
+  </script>
   <button id="dock-btn" type="button" title="Dock badge back into the IDE"
           aria-label="Dock badge back into the IDE">⤋</button>
   <button id="install-btn" type="button" title="Install as app"
@@ -417,7 +443,7 @@
     // --- Pop-out mode ----------------------------------------------------
     // When opened as a standalone window (?popout=1) the badge has no
     // parent frame to poke Module.__webterm directly, so all stdio and
-    // status flow over a fixed-name BroadcastChannel ('fri3d-ide-vbadge',
+    // status flow over a fixed-name BroadcastChannel ('mpos-ide-vdevice',
     // single IDE + single badge window per origin) back to the IDE:
     //   page -> IDE: {type:'hello'} on load, {type:'out', data:Uint8Array}
     //                for stdout, {type:'pong', calledRun, inqLen} replies,
@@ -454,7 +480,7 @@
       window.addEventListener('resize', fitBadge);
       window.addEventListener('orientationchange', fitBadge);
 
-      var chan = new BroadcastChannel('fri3d-ide-vbadge');
+      var chan = new BroadcastChannel('mpos-ide-vdevice');
       Module.__webterm.onOutput = function (b) {
         chan.postMessage({ type: 'out', data: b });
       };

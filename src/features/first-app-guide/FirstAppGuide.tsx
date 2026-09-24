@@ -186,7 +186,7 @@ export function FirstAppGuide() {
                 {isVirtualBadge && stepIndex === 0 ? (
                     <div className="mt-4 border-2 border-black bg-edit p-3 text-sm">
                         <div className="font-heading font-black">
-                            {t('first-app-guide.virtual-controls.title', 'Keep the virtual badge out of your way')}
+                            {t('first-app-guide.virtual-controls.title', 'Keep the virtual device out of your way')}
                         </div>
                         <ul className="mt-2 list-disc space-y-1 pl-5 leading-relaxed">
                             <li>{t('first-app-guide.virtual-controls.move', 'Move it by dragging the purple handle.')}</li>

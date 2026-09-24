@@ -31,6 +31,7 @@ import { useAppsStore } from '../stores/apps'
 import { useEditorTabsStore } from '../stores/editorTabs'
 import { useSettingsStore } from '../stores/settings'
 import { useUiStore, withLoader } from '../stores/ui'
+import { useDeviceKindStore, deviceKindFromHardwareId } from '../stores/deviceKind'
 import { openFileContent } from './files.service'
 
 const t = (key: string, fallback: string, opts?: Record<string, unknown>) =>
@@ -190,6 +191,7 @@ function resetDeviceState(): void {
     useAppsStore.getState().reset()
     useUiStore.getState().clearLoaders()
     useUiStore.getState().setRunning(false)
+    useDeviceKindStore.getState().setDetectedRealKind(null)
 }
 
 function handleUnexpectedDisconnect(port: Transport): void {
@@ -222,7 +224,7 @@ export async function connectDevice(type: TransportType, ui: ConnectUi): Promise
             const ok = await ui.confirm(
                 t(
                     'app.vbadge-disclaimer',
-                    'The virtual badge is a preview of what the real Fri3d badge can do. It runs the same MicroPythonOS, but not everything works the same: hardware like WiFi, sensors and sound is missing or behaves differently, and timing/performance differ from the real device.',
+                    'The virtual device is a preview of what real MicroPythonOS hardware can do. It runs the same MicroPythonOS, but not everything works the same: hardware like WiFi, sensors and sound is missing or behaves differently, and timing/performance differ from the real device.',
                 ),
             )
             if (!ok) return
@@ -234,6 +236,7 @@ export async function connectDevice(type: TransportType, ui: ConnectUi): Promise
         port = new VirtualBadgeTransport(undefined, {
             attach: await hasOrphanBadgeWindow(),
             popOut: useSettingsStore.getState().vbadgePopOut,
+            skin: useDeviceKindStore.getState().virtualKind,
         })
     }
     else port = prepareUsbPort()
@@ -270,7 +273,7 @@ export async function connectDevice(type: TransportType, ui: ConnectUi): Promise
     useConnectionStore.getState().startSynchronizing(port)
 
     if (useSettingsStore.getState().interruptDevice) {
-        const syncError = await readDeviceOnConnect(port)
+        const syncError = await readDeviceOnConnect(port, type)
         if (syncError) {
             await closeFailedConnection(port)
             useConnectionStore.getState().setError(syncError)
@@ -288,7 +291,7 @@ export async function connectDevice(type: TransportType, ui: ConnectUi): Promise
     }
 }
 
-async function readDeviceOnConnect(port: Transport): Promise<Error | null> {
+async function readDeviceOnConnect(port: Transport, type: TransportType): Promise<Error | null> {
     const loader = useUiStore.getState().showLoader(t('app.reading-device', 'Reading device…'))
     useFileStore.getState().setLoading(t('files.loading', 'Loading files…'))
     let raw: MpRawMode | null = null
@@ -299,6 +302,16 @@ async function readDeviceOnConnect(port: Transport): Promise<Error | null> {
         toast.success(t('app.device-connected', 'Device connected'), {
             description: `${devInfo.machine}\n${devInfo.version}`,
         })
+
+        // Best-effort device-kind detection: probe for MicroPythonOS and its
+        // hardware id so kind-scoped UI (templates, doc links, labels) can
+        // reflect the connected device. Never blocks or fails the connect.
+        // Skipped for the virtual device, whose kind is the user's explicit
+        // skin choice rather than something to auto-detect.
+        if (type !== 'vm') {
+            const hardwareId = await raw.getMposHardwareId()
+            useDeviceKindStore.getState().setDetectedRealKind(deviceKindFromHardwareId(hardwareId))
+        }
 
         if (pendingInstallUrl) {
             loader.update(t('pkg.installing', 'Installing {{pkg}}…', { pkg: pendingInstallUrl }))
@@ -570,7 +583,7 @@ function rgb565ToPngBlob(buf: Uint8Array, width: number, height: number): Promis
 }
 
 /** Capture the device screen over raw REPL (MicroPythonOS LVGL snapshot)
- *  and download it as a PNG. Virtual badge takes a direct canvas grab
+ *  and download it as a PNG. Virtual device takes a direct canvas grab
  *  instead (faster, no REPL round-trip). */
 export async function takeScreenshot(): Promise<void> {
     const { port } = useConnectionStore.getState()
@@ -586,7 +599,7 @@ export async function takeScreenshot(): Promise<void> {
         URL.revokeObjectURL(url)
     }
 
-    // Virtual badge: grab the canvas directly (popped-out badge falls
+    // Virtual device: grab the canvas directly (popped-out device falls
     // through to the REPL path — no same-document canvas available).
     if (port instanceof VirtualBadgeTransport) {
         try {
@@ -609,7 +622,7 @@ export async function takeScreenshot(): Promise<void> {
     await withLoader(t('tool.screenshot-taking', 'Taking screenshot…'), async () => {
         // capture_screenshot()'s width/height only size the buffer; the LVGL
         // snapshot always renders at the display's real resolution, so ask
-        // the device for it (e.g. Fri3d badge 2024 is 296x240, not 320x240).
+        // the device for it (e.g. Fri3d Camp 2024 badge is 296x240, not 320x240).
         const out = await withRawMode(async (raw) => {
             return await raw.exec(
                 `

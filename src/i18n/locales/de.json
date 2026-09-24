@@ -45,7 +45,7 @@
             "color-theme": "Design"
         },
         "about": {
-            "cta": "Wenn Ihnen Fri3d-IDE gefällt, geben Sie ihm bitte einen Stern auf GitHub ⭐ und verbreiten Sie die Nachricht in den sozialen Medien 📢",
+            "cta": "Wenn Ihnen MicroPythonOS IDE gefällt, geben Sie ihm bitte einen Stern auf GitHub ⭐ und verbreiten Sie die Nachricht in den sozialen Medien 📢",
             "report-bug": "Sie können auch einen Fehler melden 🐞"
         },
         "editor": {
@@ -101,16 +101,16 @@
             "get-started": "Loslegen! 🚀",
             "steps": {
                 "welcome": {
-                    "title": "Willkommen bei Fri3d-IDE! 👋",
-                    "text": "Hallo! Ich bin dein Fri3d-Guide. Lass mich dir eine kurze Tour geben, damit du sofort loslegen kannst!"
+                    "title": "Willkommen bei MicroPythonOS IDE! 👋",
+                    "text": "Hallo! Ich bin dein Guide. Lass mich dir eine kurze Tour geben, damit du sofort loslegen kannst!"
                 },
                 "toolbar": {
                     "title": "Hauptwerkzeugleiste",
-                    "text": "Das ist deine Hauptwerkzeugleiste. Speichere Dateien, führe Code auf dem Badge aus und verbinde dein Fri3d-Gerät von hier aus."
+                    "text": "Das ist deine Hauptwerkzeugleiste. Speichere Dateien, führe Code auf dem Badge aus und verbinde dein Gerät von hier aus."
                 },
                 "connect": {
                     "title": "Über USB verbinden",
-                    "text": "Klicke diesen Button, um dein Fri3d-Badge über USB/Seriell zu verbinden. Du kannst auch Bluetooth 🦷 oder WebREPL 🌐 nutzen!"
+                    "text": "Klicke diesen Button, um dein Badge über USB/Seriell zu verbinden. Du kannst auch Bluetooth 🦷 oder WebREPL 🌐 nutzen!"
                 },
                 "side-menu": {
                     "title": "Seitenmenü",
@@ -130,7 +130,7 @@
                 },
                 "done": {
                     "title": "Alles bereit! 🚀",
-                    "text": "Das war die Tour! Verbinde dein Fri3d-Badge und fang an, tolle Dinge zu bauen. Viel Spaß beim Programmieren!"
+                    "text": "Das war die Tour! Verbinde dein Badge und fang an, tolle Dinge zu bauen. Viel Spaß beim Programmieren!"
                 }
             }
         }

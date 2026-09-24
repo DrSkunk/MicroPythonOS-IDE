@@ -27,6 +27,7 @@ import { refreshFileTree } from '../../services/files.service'
 import { useUploadFlow } from './UploadDialog'
 import { disconnectDevice } from '../../services/device.service'
 import { isConnectionActive, useConnectionStore } from '../../stores/connection'
+import { useActiveDeviceKind } from '../../stores/deviceKind'
 import { installPkg, installPkgFromUrl } from '../../services/packages.service'
 import { prettifyCurrentFile } from '../../services/format.service'
 import { useConfirm, usePrompt } from '../../components/dialogs'
@@ -234,12 +235,17 @@ function ToolsPanel() {
     const { t } = useTranslation()
     const confirm = useConfirm()
     const prompt = usePrompt()
+    const activeDeviceKind = useActiveDeviceKind()
 
     const linkClass = 'flex items-center gap-1.5 py-0.5 text-sm hover:text-fg-highlight'
     const docs: Array<[string, string]> = [
         ['https://docs.micropython.org/en/latest/', 'MicroPython docs'],
         ['https://docs.micropythonos.com/', 'MicroPythonOS docs'],
-        ['https://fri3dcamp.github.io/badge_2026/', 'Fri3d Camp 2026 badge'],
+        // The Fri3d Badge 2026 doc link is only relevant to that specific
+        // device workspace; MicroPython/MicroPythonOS docs apply everywhere.
+        ...(activeDeviceKind === 'fri3d-badge-2026'
+            ? ([['https://fri3dcamp.github.io/badge_2026/', 'Fri3d Camp 2026 badge']] as Array<[string, string]>)
+            : []),
     ]
 
     return (

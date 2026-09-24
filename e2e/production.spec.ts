@@ -39,7 +39,7 @@ function isApplicationAsset(request: Request, page: Page): boolean {
 /** The Welcome tab greets every fresh session in the editor area. */
 function welcomeTab(page: Page) {
     return page.getByRole('tabpanel').filter({
-        has: page.getByRole('heading', { name: 'Welcome to Fri3d-IDE' }),
+        has: page.getByRole('heading', { name: 'Welcome to MicroPythonOS IDE' }),
     })
 }
 
@@ -65,7 +65,7 @@ test('production bundle boots without runtime or asset errors', async ({ page })
     const response = await page.goto('./')
 
     expect(response?.ok()).toBe(true)
-    await expect(page.getByText('Fri3d-IDE', { exact: true }).first()).toBeVisible()
+    await expect(page.getByText('MicroPythonOS IDE', { exact: true }).first()).toBeVisible()
     await expect(welcomeTab(page)).toBeVisible()
     await expect(page.getByRole('tab', { name: 'Terminal' })).toBeVisible()
     await page.getByRole('button', { name: 'New file' }).click()
@@ -78,15 +78,15 @@ test('production metadata supports rich social previews', async ({ page }) => {
 
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
         'href',
-        'https://fri3dcamp.github.io/Fri3d-IDE/',
+        'https://drskunk.github.io/MicroPythonOS-IDE/',
     )
     await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
         'content',
-        'Fri3d IDE — MicroPython in your browser',
+        'MicroPythonOS IDE — MicroPython in your browser',
     )
     await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
         'content',
-        'https://fri3dcamp.github.io/Fri3d-IDE/social-preview.png',
+        'https://drskunk.github.io/MicroPythonOS-IDE/social-preview.png',
     )
     await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute('content', 'summary_large_image')
 })
@@ -172,15 +172,15 @@ test('Web Serial and Bluetooth permission cancellation is handled safely', async
     expectNoBrowserProblems(problems, BADGEHUB_AUTH_CONSOLE_ERRORS)
 })
 
-test('virtual badge starts in the production shell', async ({ page }) => {
+test('virtual device starts in the production shell', async ({ page }) => {
     const problems = watchForBrowserProblems(page)
     await page.goto('./')
 
     await page.getByRole('tab', { name: 'File Manager' }).click()
-    await page.getByLabel('Side menu').getByRole('button', { name: 'Connect to virtual badge' }).click()
+    await page.getByLabel('Side menu').getByRole('button', { name: 'Connect to virtual device' }).click()
     await page.getByRole('button', { name: 'Confirm' }).click()
 
-    const badge = page.locator('#virtual-badge-panel iframe[title="MicroPythonOS virtual badge"]')
+    const badge = page.locator('#virtual-badge-panel iframe[title="MicroPythonOS virtual device"]')
     await expect(badge).toBeVisible({ timeout: 15_000 })
     await expect(badge).toHaveAttribute('src', /vbadge\/index\.html/)
     expectNoBrowserProblems(problems, [
