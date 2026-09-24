@@ -14,6 +14,10 @@ All notable user-facing changes to MicroPythonOS IDE (formerly Fri3d-IDE).
 - **Virtual device picker** — the virtual device now offers a choice between
   a generic MicroPythonOS device skin and the Fri3d Camp 2026 badge skin,
   selectable from the Welcome page.
+- **Generic MicroPythonOS device shape** — the generic virtual device skin
+  no longer mimics the Fri3d badge's horizontal PCB layout; it's now its
+  own simpler, more vertical shape with a plain LED strip on top, the
+  screen in the middle, and a D-pad + button cluster below.
 - **Device workspace auto-detection** — connecting a physical device now
   detects whether it runs plain MicroPython, MicroPythonOS, or is
   specifically a Fri3d Camp 2026 badge, and scopes app templates and

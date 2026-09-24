@@ -46,6 +46,16 @@ const SHOW_BADGE_EVENT = 'mpos-ide:vdevice:show'
 /** IDBFS mountpoints double as IndexedDB database names (Emscripten IDBFS). */
 const VBADGE_IDB_NAMES = ['/data', '/apps']
 
+/** Badge footprint per skin (CSS px, badge element + 2px border), used to
+ *  size the inline iframe and pop-out window before the page has loaded
+ *  and its own shrink-wrap/scale-to-fit logic can measure the real DOM.
+ *  Must be kept roughly in sync with the --badge-w-mm/--badge-h-mm * --u
+ *  values in vbadge/index.html so there's no visible jump once it loads. */
+const BADGE_FOOTPRINT: Record<'fri3d-badge-2026' | 'micropythonos', { width: number; height: number }> = {
+    'fri3d-badge-2026': { width: 808, height: 369 },
+    micropythonos: { width: 409, height: 679 },
+}
+
 /** True while a virtual device iframe is alive (its IDBFS would recreate /
  *  rewrite the databases we are trying to delete). */
 export function isVirtualBadgeRunning(): boolean {
@@ -373,11 +383,12 @@ export class VirtualBadgeTransport extends Transport {
         iframe.title = 'MicroPythonOS virtual device'
         iframe.src = this.skinnedUrl()
         iframe.setAttribute('allowtransparency', 'true')
+        const footprint = BADGE_FOOTPRINT[this.skin]
         Object.assign(iframe.style, {
-            // Matches badge size in vbadge/index.html (119x54mm @ --u:6.75px/mm
-            // + 2px border) so the load-time shrink-wrap doesn't visibly jump.
-            width: '808px',
-            height: '369px',
+            // Matches the active skin's badge size in vbadge/index.html so the
+            // load-time shrink-wrap below doesn't visibly jump.
+            width: `${footprint.width}px`,
+            height: `${footprint.height}px`,
             border: 'none',
             display: 'block',
             background: 'transparent',
@@ -523,8 +534,12 @@ export class VirtualBadgeTransport extends Transport {
         this.helloSeen = false
         const chan = this.openChannel(POPOUT_CHANNEL)
 
-        const badgeW = 830
-        const badgeH = 400
+        // A little slack beyond the badge's own footprint for browser
+        // window chrome (title bar etc.); the page's own fitBadge() scales
+        // the badge to whatever viewport it actually gets.
+        const footprint = BADGE_FOOTPRINT[this.skin]
+        const badgeW = footprint.width + 22
+        const badgeH = footprint.height + 31
         // Resolved IDE theme (settings + OS pref), mirrored by initTheme().
         const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'
         const win = window.open(
