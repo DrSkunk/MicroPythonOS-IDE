@@ -45,7 +45,7 @@
             "color-theme": "Tema"
         },
         "about": {
-            "cta": "Jika Anda menyukai Fri3d-IDE, silakan beri bintang di GitHub ⭐ dan sebarkan berita di media sosial 📢",
+            "cta": "Jika Anda menyukai MicroPythonOS IDE, silakan beri bintang di GitHub ⭐ dan sebarkan berita di media sosial 📢",
             "report-bug": "Anda juga dapat melaporkan bug 🐞"
         },
         "editor": {
@@ -84,16 +84,16 @@
             "get-started": "Mari mulai! 🚀",
             "steps": {
                 "welcome": {
-                    "title": "Selamat datang di Fri3d-IDE! 👋",
-                    "text": "Halo! Saya panduan Fri3d-mu. Biar saya tunjukkan tur singkat agar kamu bisa langsung mulai coding!"
+                    "title": "Selamat datang di MicroPythonOS IDE! 👋",
+                    "text": "Halo! Saya panduan mu. Biar saya tunjukkan tur singkat agar kamu bisa langsung mulai coding!"
                 },
                 "toolbar": {
                     "title": "Toolbar Utama",
-                    "text": "Ini adalah toolbar utamamu. Simpan file, jalankan kode di badge, dan hubungkan perangkat Fri3d-mu dari sini."
+                    "text": "Ini adalah toolbar utamamu. Simpan file, jalankan kode di badge, dan hubungkan perangkat mu dari sini."
                 },
                 "connect": {
                     "title": "Hubungkan melalui USB",
-                    "text": "Klik tombol ini untuk menghubungkan badge Fri3d-mu melalui USB/Serial. Kamu juga bisa menggunakan Bluetooth 🦷 atau WebREPL 🌐!"
+                    "text": "Klik tombol ini untuk menghubungkan badge mu melalui USB/Serial. Kamu juga bisa menggunakan Bluetooth 🦷 atau WebREPL 🌐!"
                 },
                 "side-menu": {
                     "title": "Menu Samping",
@@ -113,7 +113,7 @@
                 },
                 "done": {
                     "title": "Semua siap! 🚀",
-                    "text": "Itulah turnya! Hubungkan badge Fri3d-mu dan mulai membangun hal-hal yang luar biasa. Selamat coding!"
+                    "text": "Itulah turnya! Hubungkan badge mu dan mulai membangun hal-hal yang luar biasa. Selamat coding!"
                 }
             }
         }

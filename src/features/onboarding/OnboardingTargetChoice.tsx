@@ -25,13 +25,13 @@ export function OnboardingTargetChoice({
         {
             target: 'real',
             icon: Cable,
-            title: t('onboarding.target-real', 'Real Fri3d badge'),
+            title: t('onboarding.target-real', 'Real device'),
             description: t('onboarding.target-real-detail', 'Connect over USB and use the physical badge.'),
         },
         {
             target: 'virtual',
             icon: MonitorSmartphone,
-            title: t('onboarding.target-virtual', 'Virtual badge'),
+            title: t('onboarding.target-virtual', 'Virtual device'),
             description: t('onboarding.target-virtual-detail', 'Run it in the browser without hardware.'),
         },
     ]
@@ -46,7 +46,7 @@ export function OnboardingTargetChoice({
             >
                 <div id="onboarding-target-title" className="text-center font-heading text-2xl font-black">{title}</div>
                 <p className="mt-2 text-center text-sm leading-relaxed">
-                    {t('onboarding.target-text', 'Choose a physical Fri3d badge or the virtual badge.')}
+                    {t('onboarding.target-text', 'Choose a physical device or the virtual device.')}
                 </p>
                 <div className="mt-5 grid gap-3 sm:grid-cols-2">
                     {options.map(({ target, icon: Icon, title: optionTitle, description }) => (

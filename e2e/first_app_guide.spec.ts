@@ -5,7 +5,7 @@ import { expect, test, type Page } from '@playwright/test'
 test.use({ actionTimeout: 15_000 })
 
 const APP_ID = 'com.example.sparkgame'
-const BADGE_IFRAME = '#virtual-badge-panel iframe[title="MicroPythonOS virtual badge"]'
+const BADGE_IFRAME = '#virtual-badge-panel iframe[title="MicroPythonOS virtual device"]'
 
 /** Snapshot the badge screen pixels via the same-origin iframe canvas. */
 async function badgeScreenSnapshot(page: Page): Promise<string> {
@@ -53,19 +53,19 @@ async function completeGuideStep(page: Page, stepNumber: number, totalSteps: num
     await expect(guide.getByRole('status')).toContainText('Code looks good', { timeout: 60_000 })
 }
 
-test('first-app guide builds a joystick game on the virtual badge', async ({ page }) => {
+test('first-app guide builds a joystick game on the virtual device', async ({ page }) => {
     test.setTimeout(420_000)
     await page.goto('./')
 
-    // Onboarding: build my first app on the virtual badge, started from the
+    // Onboarding: build my first app on the virtual device, started from the
     // Welcome tab (the side menu repeats the button, so scope to the tab panel).
     const welcome = page.getByRole('tabpanel').filter({
-        has: page.getByRole('heading', { name: 'Welcome to Fri3d-IDE' }),
+        has: page.getByRole('heading', { name: 'Welcome to MicroPythonOS IDE' }),
     })
     await welcome.getByRole('button', { name: /Build my first app/ }).click()
     const targetChoice = page.getByRole('dialog', { name: 'Where should the app run?' })
-    await targetChoice.getByRole('button', { name: /Virtual badge/ }).click()
-    // Virtual badge preview disclaimer.
+    await targetChoice.getByRole('button', { name: /Virtual device/ }).click()
+    // Virtual device preview disclaimer.
     await page.getByRole('button', { name: 'Confirm' }).click()
 
     await expect(page.locator(BADGE_IFRAME)).toBeVisible({ timeout: 30_000 })

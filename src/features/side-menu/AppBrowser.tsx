@@ -10,6 +10,7 @@ import {
     submitGuidedCreateApp,
     useOnboardingStore,
 } from '../../stores/onboarding'
+import { useActiveDeviceKind } from '../../stores/deviceKind'
 
 /* ------------------------------------------------------------------ */
 /* Create-app dialog                                                   */
@@ -125,6 +126,7 @@ function CreateAppDialog({ close }: { close: (created: boolean | null) => void }
     const { t } = useTranslation()
     const confirm = useConfirm()
     const guidedCreateApp = useOnboardingStore((state) => state.guidedCreateApp)
+    const activeDeviceKind = useActiveDeviceKind()
 
     const [fullname, setFullname] = useState('')
     const [name, setName] = useState('My App')
@@ -307,6 +309,14 @@ function CreateAppDialog({ close }: { close: (created: boolean | null) => void }
                         </option>
                     ))}
                 </select>
+                {activeDeviceKind === 'generic-micropython' && (
+                    <p className="col-span-2 text-xs text-amber-600 dark:text-amber-400">
+                        {t(
+                            'apps.template-needs-mpos',
+                            'This template uses the mpos UI toolkit and needs MicroPythonOS — it may not run on plain MicroPython.',
+                        )}
+                    </p>
+                )}
 
                 <span className="text-sm">{t('apps.field-icon', 'Icon')}</span>
                 <div className="flex items-center gap-2">

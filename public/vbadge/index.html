@@ -9,14 +9,20 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#000000">
-  <title>Fri3d Camp 2026 Virtual Badge</title>
+  <title>MicroPythonOS Virtual Device</title>
   <style>
     /* ---- Tuning knobs ------------------------------------------------ */
-    /* Layout uses the silkscreen SVG coordinate system (viewBox 119x54 mm).
-       --u = CSS px per mm; element centers below come straight from the SVG.
-       Elements are positioned by --cx/--cy (mm, center point). */
+    /* Layout uses the silkscreen SVG coordinate system (viewBox 119x54 mm)
+       by default (the Fri3d Badge 2026 skin). --u = CSS px per mm; element
+       centers below come straight from the SVG. Elements are positioned by
+       --cx/--cy (mm, center point). The generic MicroPythonOS skin (below)
+       overrides --badge-w/--badge-h-mm plus every --cx/--cy to lay the same
+       controls out as a plain, more vertical device instead: LEDs on top,
+       screen in the middle, buttons below. */
     :root {
       --u: 6.75px;             /* px per svg mm -- overall badge size */
+      --badge-w-mm: 119;       /* badge footprint (mm), skins may override */
+      --badge-h-mm: 54;
       --joy-size: 14;          /* joystick pad (mm) */
       --nub-size: 7;           /* joystick nub (mm) */
       --btn-size: 6.5;         /* X/Y/A/B buttons (mm) */
@@ -24,7 +30,7 @@
       --led-size: 5.5;         /* NeoPixel square (mm) */
       --led-pitch: 10.007;     /* LED center-to-center (mm): (79.3-39.271)/4 */
       --screen-cx: 59.5;       /* screen center (mm) */
-      --screen-cy: 22.5;
+      --screen-cy: 0;          /* screen top-edge offset (mm), see #screen */
     }
 
     /* Transparent inline (floating panel in the IDE shows through around the
@@ -63,25 +69,49 @@
     body:not(.popout) #install-btn { right: 8px; }
     #install-btn.available { display: block; }
 
-    /* Badge body: fixed 119x54 mm PCB with silkscreen overlay. */
+    /* Badge/device body: shared control layout (screen, joystick, ABXY,
+       menu/start, LED strip); the skin (chosen via ?skin=) only changes the
+       bezel chrome below — Fri3d Badge 2026 gets its PCB silkscreen and
+       replicates the real hardware's horizontal layout; the generic
+       MicroPythonOS skin gets a plain bezel with its own simpler, more
+       vertical layout (LEDs on top, screen, then buttons below). Both
+       reuse the same DOM ids/button data-attributes, so the JS bridge
+       below never needs to know which skin is active. */
     #badge {
       position: relative;
-      width: calc(var(--u) * 119);
-      height: calc(var(--u) * 54);
-      background: #411657;
-      border: 2px solid #e8a6a0;
+      width: calc(var(--u) * var(--badge-w-mm));
+      height: calc(var(--u) * var(--badge-h-mm));
       border-radius: calc(var(--u) * 4);
       user-select: none;
       -webkit-user-select: none;
       touch-action: none;
     }
-    /* Silkscreen artwork layer: above PCB colour, below screen/controls. */
-    #badge::before {
+    /* Fri3d Badge 2026 skin: PCB colour + silkscreen artwork overlay. */
+    body[data-skin="fri3d-badge-2026"] #badge {
+      background: #411657;
+      border: 2px solid #e8a6a0;
+    }
+    body[data-skin="fri3d-badge-2026"] #badge::before {
       content: '';
       position: absolute;
       inset: 0;
       background: url('../badge_silkscreen.svg') center / 100% 100% no-repeat;
       pointer-events: none;
+    }
+    /* Generic MicroPythonOS skin: plain bezel, no photoreal artwork, and a
+       taller/narrower footprint (see the --badge-*-mm and --cx/--cy
+       overrides further down) so it reads as a generic gadget rather than
+       a replica of the Fri3d badge PCB. */
+    body[data-skin="micropythonos"] {
+      --badge-w-mm: 60;
+      --badge-h-mm: 100;
+      --screen-cx: 30;
+      --screen-cy: 14;
+    }
+    body[data-skin="micropythonos"] #badge {
+      background: #2b2b30;
+      border: 2px solid #55555c;
+      border-radius: calc(var(--u) * 6);
     }
     /* Children paint above the silkscreen, centered on SVG mm coords. */
     #badge > * {
@@ -95,15 +125,19 @@
     #status { --cx: 59.5; --cy: 2;
       white-space: nowrap; color: #ffe9ff; font: 11px system-ui; pointer-events: none; }
 
-    /* Screen: top edge flush with badge top, horizontally centered. */
-    #screen { --cx: var(--screen-cx); --cy: 0; display: flex;
+    /* Screen: top edge flush with badge top (Fri3d skin) or offset below
+       the LED strip (MicroPythonOS skin, via --screen-cy), horizontally
+       centered. */
+    #screen { --cx: var(--screen-cx); --cy: var(--screen-cy); display: flex;
       transform: translate(-50%, 0); }
     canvas { image-rendering: pixelated; background: #000; outline: none;
       border: 4px solid #111; border-radius: 3px;
       touch-action: none; user-select: none; -webkit-user-select: none; }
 
-    /* Joystick pad centered on its silkscreen footprint. */
+    /* Joystick pad centered on its silkscreen footprint (Fri3d skin only —
+       the generic MicroPythonOS skin swaps it for a plain D-pad below). */
     #joy-wrap { --cx: 16.6; --cy: 27; }
+    body[data-skin="micropythonos"] #joy-wrap { display: none; }
     #joystick {
       position: relative;
       width: calc(var(--u) * var(--joy-size)); height: calc(var(--u) * var(--joy-size));
@@ -133,10 +167,23 @@
       box-shadow: 0 2px 0 rgba(0,0,0,.35);
       color: #d4a017; font: bold 13px system-ui;
     }
+    body[data-skin="micropythonos"] .pad-button {
+      background: #3a3a40;
+      border-color: #55555c;
+      color: #e6e6ea;
+    }
     .pad-button:active, .pad-button.pressed {
       background: #2a2a2a;
       box-shadow: 0 0 8px 2px rgba(255, 255, 255, .25);
     }
+    /* D-pad (generic MicroPythonOS skin only): four plain buttons standing
+       in for the Fri3d skin's analog joystick nub above, reusing the same
+       .pad-button chrome and the JOY_BITS bit positions (see BUTTON_BITS in
+       the script below) so no separate input-handling code is needed. */
+    .dpad-btn { display: none; }
+    body[data-skin="micropythonos"] .dpad-btn { display: flex; align-items: center; justify-content: center; }
+
+    /* Fri3d Badge 2026 skin: X/Y/A/B diamond + MENU/START on the silkscreen. */
     .pad-button[data-button="x"] { --cx: 105.1; --cy: 17.5; }
     .pad-button[data-button="b"] { --cx: 105.1; --cy: 38.2; }
     .pad-button[data-button="y"] { --cx: 95.7;  --cy: 27.7; }
@@ -147,13 +194,29 @@
     .pad-button[data-button="menu"]  { --cx: 46;   --cy: 49.5; }
     .pad-button[data-button="start"] { --cx: 72.8; --cy: 49.5; }
 
-    /* NeoPixels: LED1..LED5 centers from (39.271, 43.2) to (79.3, 43.2). */
+    /* Generic MicroPythonOS skin: everything below the screen, in two plain
+       rows — a D-pad + X/Y/A/B cluster, then MENU/START underneath. */
+    body[data-skin="micropythonos"] .pad-button[data-button="up"]    { --cx: 18;   --cy: 57.5; }
+    body[data-skin="micropythonos"] .pad-button[data-button="down"]  { --cx: 18;   --cy: 70.5; }
+    body[data-skin="micropythonos"] .pad-button[data-button="left"]  { --cx: 11.5; --cy: 64; }
+    body[data-skin="micropythonos"] .pad-button[data-button="right"] { --cx: 24.5; --cy: 64; }
+    body[data-skin="micropythonos"] .pad-button[data-button="x"] { --cx: 44;   --cy: 57.5; }
+    body[data-skin="micropythonos"] .pad-button[data-button="b"] { --cx: 44;   --cy: 70.5; }
+    body[data-skin="micropythonos"] .pad-button[data-button="y"] { --cx: 37.5; --cy: 64; }
+    body[data-skin="micropythonos"] .pad-button[data-button="a"] { --cx: 50.5; --cy: 64; }
+    body[data-skin="micropythonos"] .pad-button[data-button="menu"]  { --cx: 20; --cy: 84; }
+    body[data-skin="micropythonos"] .pad-button[data-button="start"] { --cx: 40; --cy: 84; }
+
+    /* NeoPixels: LED1..LED5 centers from (39.271, 43.2) to (79.3, 43.2)
+       (Fri3d skin). The generic MicroPythonOS skin moves the strip to the
+       top of the device instead of tucking it under the screen. */
     #leds {
       --cx: 59.2855; /* midpoint of LED1..LED5 */
       --cy: 43.2;
       display: flex;
       gap: calc(var(--u) * (var(--led-pitch) - var(--led-size)));
     }
+    body[data-skin="micropythonos"] #leds { --cx: 30; --cy: 6; }
     .led {
       width: calc(var(--u) * var(--led-size)); height: calc(var(--u) * var(--led-size));
       border-radius: 3px;
@@ -163,7 +226,16 @@
     }
   </style>
 </head>
-<body>
+<body data-skin="fri3d-badge-2026">
+  <script>
+    // Skin (bezel chrome) is chosen once via ?skin=; DOM ids/button
+    // data-attributes are identical across skins, so nothing else here
+    // needs to know which one is active. Defaults to the Fri3d Badge 2026
+    // skin above for continuity with existing users.
+    if (new URLSearchParams(location.search).get('skin') === 'micropythonos') {
+      document.body.dataset.skin = 'micropythonos';
+    }
+  </script>
   <button id="dock-btn" type="button" title="Dock badge back into the IDE"
           aria-label="Dock badge back into the IDE">⤋</button>
   <button id="install-btn" type="button" title="Install as app"
@@ -183,6 +255,12 @@
     <button class="pad-button" data-button="b" type="button">B</button>
     <button class="pad-button" data-button="menu" type="button">M</button>
     <button class="pad-button" data-button="start" type="button">S</button>
+    <!-- Generic MicroPythonOS skin only (hidden for Fri3d, see .dpad-btn
+         above): plain D-pad standing in for the analog joystick. -->
+    <button class="pad-button dpad-btn" data-button="up" type="button">▲</button>
+    <button class="pad-button dpad-btn" data-button="down" type="button">▼</button>
+    <button class="pad-button dpad-btn" data-button="left" type="button">◀</button>
+    <button class="pad-button dpad-btn" data-button="right" type="button">▶</button>
     <div id="leds"></div>
   </div>
   <script>
@@ -256,7 +334,13 @@
     //  5 menu, 6 b, 7 a, 8 y, 9 x). START is not on the physical expander
     //  (GPIO 0 on the badge), so it uses bit 12 — outside the 12-entry
     //  digital tuple — and is read separately by the web START indev.
-    var BUTTON_BITS = { menu: 5, b: 6, a: 7, y: 8, x: 9, start: 12 };
+    // up/down/left/right are only ever attached to the generic
+    // MicroPythonOS skin's D-pad buttons (the Fri3d skin's analog
+    // joystick below sets the same bits directly via pointer drag).
+    var BUTTON_BITS = {
+      menu: 5, b: 6, a: 7, y: 8, x: 9, start: 12,
+      right: 1, left: 2, down: 3, up: 4,
+    };
     document.querySelectorAll('.pad-button').forEach(function (btn) {
       var bit = BUTTON_BITS[btn.dataset.button];
       function down(e) { e.preventDefault(); btn.classList.add('pressed'); webio.buttons |= (1 << bit); }
@@ -417,7 +501,7 @@
     // --- Pop-out mode ----------------------------------------------------
     // When opened as a standalone window (?popout=1) the badge has no
     // parent frame to poke Module.__webterm directly, so all stdio and
-    // status flow over a fixed-name BroadcastChannel ('fri3d-ide-vbadge',
+    // status flow over a fixed-name BroadcastChannel ('mpos-ide-vdevice',
     // single IDE + single badge window per origin) back to the IDE:
     //   page -> IDE: {type:'hello'} on load, {type:'out', data:Uint8Array}
     //                for stdout, {type:'pong', calledRun, inqLen} replies,
@@ -454,7 +538,7 @@
       window.addEventListener('resize', fitBadge);
       window.addEventListener('orientationchange', fitBadge);
 
-      var chan = new BroadcastChannel('fri3d-ide-vbadge');
+      var chan = new BroadcastChannel('mpos-ide-vdevice');
       Module.__webterm.onOutput = function (b) {
         chan.postMessage({ type: 'out', data: b });
       };

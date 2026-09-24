@@ -1,6 +1,6 @@
 import { defineConfig, devices } from '@playwright/test'
 
-const basePath = '/Fri3d-IDE/'
+const basePath = '/MicroPythonOS-IDE/'
 const port = 4173
 
 export default defineConfig({

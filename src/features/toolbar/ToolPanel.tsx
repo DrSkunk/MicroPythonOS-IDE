@@ -160,7 +160,7 @@ export function ToolPanel() {
                     <Menu size={18} aria-hidden />
                 </ToolbarButton>
                 <span className="mx-1 select-none font-heading text-lg font-black tracking-tight">
-                    Fri3d-IDE
+                    MicroPythonOS IDE
                 </span>
                 <span data-tour-id="tour-save-run" className="flex items-center gap-2">
                     <ToolbarButton
@@ -198,8 +198,8 @@ export function ToolPanel() {
             <div className="flex items-center gap-2">
                 {canInstall && (
                     <ToolbarButton
-                        title={t('tool.install-app', 'Install Fri3d-IDE as app')}
-                        label={t('tool.install-app', 'Install Fri3d-IDE as app')}
+                        title={t('tool.install-app', 'Install MicroPythonOS IDE as app')}
+                        label={t('tool.install-app', 'Install MicroPythonOS IDE as app')}
                         onClick={() => void install()}
                     >
                         <Download size={18} aria-hidden />

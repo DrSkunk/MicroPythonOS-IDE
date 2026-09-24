@@ -1,6 +1,35 @@
 # Changelog
 
-All notable user-facing changes to Fri3d-IDE.
+All notable user-facing changes to MicroPythonOS IDE (formerly Fri3d-IDE).
+
+## Unreleased
+
+### Changed
+
+- **Renamed to MicroPythonOS IDE** — the project is now positioned as a
+  general MicroPythonOS IDE, with the Fri3d Camp badge as one supported
+  device among others. Product name, page title, PWA manifest, and
+  repository links were updated accordingly; the BadgeHub integration is
+  unchanged.
+- **Virtual device picker** — the virtual device now offers a choice between
+  a generic MicroPythonOS device skin and the Fri3d Camp 2026 badge skin,
+  selectable from the Welcome page.
+- **Generic MicroPythonOS device shape** — the generic virtual device skin
+  no longer mimics the Fri3d badge's horizontal PCB layout; it's now its
+  own simpler, more vertical shape with a plain LED strip on top, the
+  screen in the middle, and a D-pad + button cluster below.
+- **Device workspace auto-detection** — connecting a physical device now
+  detects whether it runs plain MicroPython, MicroPythonOS, or is
+  specifically a Fri3d Camp 2026 badge, and scopes app templates and
+  documentation links accordingly.
+- **UI style setting** — a new "Look" setting lets you switch the IDE's own
+  visual style between the classic Fri3d neobrutalist look and a softer,
+  generic MicroPythonOS look (colors, borders, shadows, and button/dialog
+  corner radius). This is a manual choice in Settings, independent of the
+  device workspace and color theme (light/dark).
+- **Real MicroPythonOS logo** — the app icon and Welcome page logo now use
+  the upstream MicroPythonOS project's ouroboros mark instead of a
+  placeholder, including the favicon, PWA icons, and Apple touch icon.
 
 ## v1.2.4 — 2026-08-14
 

@@ -1,8 +1,8 @@
-# Contributing to Fri3d-IDE
+# Contributing to MicroPythonOS IDE
 
-Thanks for your interest in contributing to **Fri3d-IDE**!
+Thanks for your interest in contributing to **MicroPythonOS IDE**!
 
-Fri3d-IDE is a browser-based IDE for developing software for Fri3d Camp boards and other MicroPython devices. It is based on the ViperIDE project and is built with React, TypeScript, Vite, CodeMirror, xterm.js, Tailwind CSS, Zustand, and browser device APIs.
+MicroPythonOS IDE is a browser-based IDE for developing software for MicroPythonOS devices, including the Fri3d Camp badge, and other MicroPython devices. It is based on the ViperIDE project and is built with React, TypeScript, Vite, CodeMirror, xterm.js, Tailwind CSS, Zustand, and browser device APIs.
 
 Contributions of all sizes are welcome, including:
 
@@ -24,10 +24,10 @@ For larger changes—especially changes to device transports, the MicroPython RE
 
 When working on an existing issue, leave a comment so others know that someone is investigating it.
 
-Because Fri3d-IDE is derived from ViperIDE, please mention in your issue or pull request whether a change is:
+Because MicroPythonOS IDE is derived from ViperIDE, please mention in your issue or pull request whether a change is:
 
-* Specific to Fri3d Camp hardware or documentation
-* A general MicroPython IDE improvement
+* Specific to a particular device (e.g. Fri3d Camp hardware) or its documentation
+* A general MicroPython/MicroPythonOS IDE improvement
 * Adapted from an upstream ViperIDE change
 
 Preserve existing copyright notices and attribution when moving or adapting upstream code.
@@ -52,8 +52,8 @@ Web Serial and Web Bluetooth generally require a secure browser context. Use `lo
 Fork the repository and clone your fork:
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/Fri3d-IDE.git
-cd Fri3d-IDE
+git clone https://github.com/YOUR-USERNAME/MicroPythonOS-IDE.git
+cd MicroPythonOS-IDE
 ```
 
 Install the locked dependencies:
@@ -330,7 +330,7 @@ Avoid logging complete terminal sessions by default. Device output may contain p
 
 ### Python formatting and linting
 
-Fri3d-IDE uses Ruff compiled to WebAssembly for Python-related tooling.
+MicroPythonOS IDE uses Ruff compiled to WebAssembly for Python-related tooling.
 
 When changing formatting or Python diagnostics:
 
@@ -378,7 +378,7 @@ A translation-only pull request is welcome. Include the language and the parts o
 
 ### PWA and offline behaviour
 
-Fri3d-IDE is configured as a progressive web application with an automatically updating service worker.
+MicroPythonOS IDE is configured as a progressive web application with an automatically updating service worker.
 
 Test PWA changes using a production build:
 
@@ -485,7 +485,7 @@ Tested:
 - npm run build
 - Chromium on Linux
 - Onboarding demo
-- Web Serial with a Fri3d Camp badge
+- Web Serial with a MicroPythonOS device
 - Open, edit, save, run and reconnect flows
 
 Not tested:
@@ -553,7 +553,7 @@ Remove passwords, private source code, device identifiers, Wi-Fi credentials, to
 
 6. Push the branch to your fork.
 
-7. Open a pull request against `Fri3dCamp/Fri3d-IDE:main`.
+7. Open a pull request against `DrSkunk/MicroPythonOS-IDE:main`.
 
 Your pull request should explain:
 
@@ -564,7 +564,7 @@ Your pull request should explain:
 * Which devices and firmware versions were tested
 * Which connection methods were tested
 * What was not tested
-* Whether the change is Fri3d-specific or generally applicable
+* Whether the change is device-specific or generally applicable
 * Any user-visible, compatibility, security, or offline impact
 * Related issues
 
@@ -595,6 +595,6 @@ work in progress
 
 Be respectful, patient, and constructive.
 
-Fri3d Camp welcomes contributors with different levels of experience. Explain decisions clearly, help others learn, and assume good intentions during reviews and technical discussions.
+The MicroPythonOS IDE community welcomes contributors with different levels of experience. Explain decisions clearly, help others learn, and assume good intentions during reviews and technical discussions.
 
-Thank you for helping improve Fri3d-IDE!
+Thank you for helping improve MicroPythonOS IDE!

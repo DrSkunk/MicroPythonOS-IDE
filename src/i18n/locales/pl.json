@@ -45,7 +45,7 @@
             "color-theme": "Motyw"
         },
         "about": {
-            "cta": "Jeśli podoba ci się Fri3d-IDE, proszę daj mu gwiazdkę na GitHub ⭐ i rozprzestrzeniaj informacje w mediach społecznościowych 📢",
+            "cta": "Jeśli podoba ci się MicroPythonOS IDE, proszę daj mu gwiazdkę na GitHub ⭐ i rozprzestrzeniaj informacje w mediach społecznościowych 📢",
             "report-bug": "Możesz także zgłosić błąd 🐞"
         },
         "editor": {
@@ -84,16 +84,16 @@
             "get-started": "Zaczynamy! 🚀",
             "steps": {
                 "welcome": {
-                    "title": "Witamy w Fri3d-IDE! 👋",
-                    "text": "Cześć! Jestem twoim przewodnikiem po Fri3d. Pozwól, że oprowadzę cię, abyś mógł od razu zacząć kodować!"
+                    "title": "Witamy w MicroPythonOS IDE! 👋",
+                    "text": "Cześć! Jestem twoim przewodnikiem. Pozwól, że oprowadzę cię, abyś mógł od razu zacząć kodować!"
                 },
                 "toolbar": {
                     "title": "Główny pasek narzędzi",
-                    "text": "To jest twój główny pasek narzędzi. Zapisuj pliki, uruchamiaj kod na badge i łącz urządzenie Fri3d stąd."
+                    "text": "To jest twój główny pasek narzędzi. Zapisuj pliki, uruchamiaj kod na badge i łącz urządzenie stąd."
                 },
                 "connect": {
                     "title": "Podłącz przez USB",
-                    "text": "Kliknij ten przycisk, aby podłączyć badge Fri3d przez USB/Szeregowy. Możesz też użyć Bluetooth 🦷 lub WebREPL 🌐!"
+                    "text": "Kliknij ten przycisk, aby podłączyć badge przez USB/Szeregowy. Możesz też użyć Bluetooth 🦷 lub WebREPL 🌐!"
                 },
                 "side-menu": {
                     "title": "Menu boczne",
@@ -113,7 +113,7 @@
                 },
                 "done": {
                     "title": "Wszystko gotowe! 🚀",
-                    "text": "To był przewodnik! Podłącz badge Fri3d i zacznij budować niesamowite rzeczy. Miłego kodowania!"
+                    "text": "To był przewodnik! Podłącz badge i zacznij budować niesamowite rzeczy. Miłego kodowania!"
                 }
             }
         }

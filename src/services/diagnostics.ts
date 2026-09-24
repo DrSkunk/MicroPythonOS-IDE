@@ -38,7 +38,7 @@ export function createDiagnosticsReport(): string {
     const worker = navigator.serviceWorker?.controller?.state ?? 'not controlling'
 
     return [
-        'Fri3d-IDE diagnostics',
+        'MicroPythonOS IDE diagnostics',
         `Version: ${VIPER_IDE_VERSION}`,
         `Commit: ${VIPER_IDE_COMMIT.slice(0, 12)}`,
         `Build: ${new Date(Number(VIPER_IDE_BUILD)).toISOString()}`,

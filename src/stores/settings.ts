@@ -12,6 +12,8 @@ export interface Settings {
     preferSource: boolean
     zoom: number
     colorTheme: 'system' | 'light' | 'dark'
+    /** Visual UI style/skin, independent from colorTheme (light/dark) and device kind. */
+    uiStyle: 'fri3d' | 'micropythonos'
     naturalSort: boolean
     sideMenuWidth: number
 }
@@ -31,6 +33,7 @@ const DEFAULTS: Settings = {
     preferSource: false,
     zoom: 1.0,
     colorTheme: 'system',
+    uiStyle: 'fri3d',
     naturalSort: true,
     sideMenuWidth: 300,
 }

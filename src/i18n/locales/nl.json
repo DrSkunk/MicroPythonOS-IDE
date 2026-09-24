@@ -9,7 +9,7 @@
             "run": "Bestand uitvoeren",
             "save": "Bestand opslaan",
             "fullscreen": "Volledig scherm",
-            "install-app": "Fri3d-IDE als App installeren",
+            "install-app": "MicroPythonOS IDE als App installeren",
             "clear": "Wissen",
             "conn": {
                 "ws": "Verbind WebREPL",
@@ -159,10 +159,10 @@
         },
         "about": {
             "changelog": "Wat is er nieuw",
-            "cta": "Als je Fri3d-IDE leuk vindt, geef het dan alsjeblieft een ster op GitHub ⭐ en vertel het verder op sociale media 📢",
+            "cta": "Als je MicroPythonOS IDE leuk vindt, geef het dan alsjeblieft een ster op GitHub ⭐ en vertel het verder op sociale media 📢",
             "report-bug": "Je kunt ook een fout melden 🐞",
             "by": "door",
-            "cta-pre": "Als je Fri3d-IDE leuk vindt,",
+            "cta-pre": "Als je MicroPythonOS IDE leuk vindt,",
             "cta-star": "geef het dan een GitHub-ster",
             "copy-diagnostics": "Diagnostiek kopiëren",
             "diagnostics-copied": "Diagnostiek gekopieerd",
@@ -323,7 +323,7 @@
             "err-conn-type": "Onbekend verbindingstype",
             "device-disconnected": "Verbinding met apparaat verbroken",
             "device-connected": "Apparaat verbonden",
-            "update-available": "Nieuwe Fri3d-IDE versie {{version}} is beschikbaar",
+            "update-available": "Nieuwe MicroPythonOS IDE versie {{version}} is beschikbaar",
             "confirm-disconnect": "Verbinding met huidig apparaat verbreken?",
             "offline": "Offline",
             "prompt-pkg-url": "Geef een pakketnaam of URL:",
@@ -338,11 +338,11 @@
             "not-responding": "Apparaat reageert niet",
             "reading-device": "Apparaat lezen…",
             "wrong-port-hint": "De gekozen poort reageerde niet als een MicroPython-apparaat. Kies een andere poort en probeer opnieuw.",
-            "vbadge-disclaimer": "De virtuele badge is een voorproefje van wat de echte Fri3d-badge kan. Hij draait hetzelfde MicroPythonOS, maar niet alles werkt hetzelfde: hardware zoals wifi, sensoren en geluid ontbreekt of gedraagt zich anders, en timing/prestaties verschillen van het echte apparaat."
+            "vbadge-disclaimer": "De virtuele badge is een voorproefje van wat de echte badge kan. Hij draait hetzelfde MicroPythonOS, maar niet alles werkt hetzelfde: hardware zoals wifi, sensoren en geluid ontbreekt of gedraagt zich anders, en timing/prestaties verschillen van het echte apparaat."
         },
         "welcome": {
-            "title": "Welkom bij Fri3d-IDE",
-            "subtitle": "MicroPython-IDE voor de Fri3d Camp 2026-badge.",
+            "title": "Welkom bij MicroPythonOS IDE",
+            "subtitle": "MicroPython-IDE voor MicroPythonOS-apparaten, waaronder de Camp-badge.",
             "tours-title": "Rondleidingen",
             "tours-text": "Stapsgewijze rondleidingen door de IDE.",
             "or-connect": "Of sla de rondleidingen over en verbind direct:",
@@ -356,7 +356,7 @@
             "continue-on-action": "Voer de gemarkeerde actie uit om verder te gaan",
             "get-started": "Doorgaan naar IDE",
             "task-connect": "Mijn badge verbinden",
-            "task-connect-detail": "Verbind een fysieke Fri3d-badge via USB.",
+            "task-connect-detail": "Verbind een fysieke badge via USB.",
             "task-virtual": "De virtuele badge proberen",
             "task-virtual-detail": "Verken MicroPythonOS zonder hardware.",
             "task-build": "Mijn eerste app bouwen",
@@ -365,8 +365,8 @@
             "task-badgehub-detail": "Zoek en installeer een geschikte badge-app.",
             "target-build-title": "Waar moet de app draaien?",
             "target-badgehub-title": "Waar moet de app worden geïnstalleerd?",
-            "target-text": "Kies een fysieke Fri3d-badge of de virtuele badge.",
-            "target-real": "Echte Fri3d-badge",
+            "target-text": "Kies een fysieke badge of de virtuele badge.",
+            "target-real": "Echte badge",
             "target-real-detail": "Verbind via USB en gebruik de fysieke badge.",
             "target-virtual": "Virtuele badge",
             "target-virtual-detail": "Draai hem zonder hardware in de browser.",
@@ -393,8 +393,8 @@
             "choose-demo": "Probeer met een demo-apparaat",
             "fallback-demo": "Gebruik toch een demo-apparaat",
             "connect-title": "Verbind je badge",
-            "connect-text": "Sluit je Fri3d-badge met een USB-C-kabel aan op deze computer, klik daarna op de gemarkeerde knop “Verbind apparaat” en kies de seriële poort in de browser-popup. De tour gaat automatisch verder zodra je verbonden bent.",
-            "demo-device": "Fri3d Badge (demo)",
+            "connect-text": "Sluit je badge met een USB-C-kabel aan op deze computer, klik daarna op de gemarkeerde knop “Verbind apparaat” en kies de seriële poort in de browser-popup. De tour gaat automatisch verder zodra je verbonden bent.",
+            "demo-device": "Badge (demo)",
             "steps": {
                 "connection": {
                     "title": "Je bent verbonden",
@@ -431,7 +431,7 @@
                 "done": {
                     "title": "Je bent er klaar voor! 🚀",
                     "text": "Dat was de tour! Je badge is verbonden en klaar. Begin met het bouwen van geweldige dingen. Veel programmeerplezier!",
-                    "text-demo": "Dat was de tour! Het demo-apparaat wordt nu losgekoppeld — sluit je Fri3d-badge aan met een USB-C-kabel en begin met bouwen. Veel programmeerplezier!"
+                    "text-demo": "Dat was de tour! Het demo-apparaat wordt nu losgekoppeld — sluit je badge aan met een USB-C-kabel en begin met bouwen. Veel programmeerplezier!"
                 }
             }
         },

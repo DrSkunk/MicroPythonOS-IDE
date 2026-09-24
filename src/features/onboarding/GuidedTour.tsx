@@ -26,7 +26,7 @@ import {
 import { firstVisibleRect, tourCardPosition } from './tourLayout'
 import { useTourSteps } from './useTourSteps'
 
-const TOUR_RESTART_EVENT = 'fri3d:onboarding:restart'
+const TOUR_RESTART_EVENT = 'mpos-ide:onboarding:restart'
 
 const ONBOARDING_TASKS: OnboardingTask[] = ['connect', 'virtual', 'build', 'badgehub']
 
@@ -35,7 +35,7 @@ export function startOnboardingTask(task: OnboardingTask) {
     window.dispatchEvent(new CustomEvent(TOUR_RESTART_EVENT, { detail: { task } }))
 }
 
-/** Open first-app onboarding directly at real/virtual badge choice. */
+/** Open first-app onboarding directly at real/virtual device choice. */
 export function startFirstAppOnboarding() {
     startOnboardingTask('build')
 }
@@ -219,7 +219,7 @@ export function GuidedTour() {
                     <div className="mt-3 font-heading text-lg font-black">
                         {target === 'real'
                             ? t('onboarding.connecting-real', 'Connecting your badge…')
-                            : t('onboarding.connecting-virtual', 'Starting the virtual badge…')}
+                            : t('onboarding.connecting-virtual', 'Starting the virtual device…')}
                     </div>
                     <p className="mt-2 text-sm opacity-80">
                         {connectionError ?? t('onboarding.connecting-wait', 'Complete any browser permission prompt to continue.')}

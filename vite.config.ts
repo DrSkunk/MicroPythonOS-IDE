@@ -50,8 +50,8 @@ export default defineConfig({
             includeAssets: ['favicon.ico', 'favicon.svg', 'favicon-96x96.png', 'apple-touch-icon.png'],
             manifestFilename: 'site.webmanifest',
             manifest: {
-                name: 'Fri3d IDE',
-                short_name: 'Fri3d IDE',
+                name: 'MicroPythonOS IDE',
+                short_name: 'MicroPythonOS IDE',
                 description: 'Browser-based IDE for connected devices',
                 // Resolve from the manifest URL so installs work both at /
                 // and under a static-host subpath such as GitHub Pages.

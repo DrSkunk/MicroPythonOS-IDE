@@ -1,5 +1,5 @@
 /*
- * Virtual badge transport: runs the vendored MicroPythonOS WebAssembly build
+ * Virtual device transport: runs the vendored MicroPythonOS WebAssembly build
  * (public/vbadge/, from https://github.com/MicroPythonOS/MicroPythonOS)
  * inside a same-origin iframe and drives its `_webterm` stdio bridge like a
  * serial device.
@@ -40,23 +40,33 @@ interface MposWindow extends Window {
  *  assumption: only one IDE tab + one badge window per origin, so a
  *  well-known name is enough — an IDE refresh just reopens the same channel
  *  and pings it to find a surviving badge window. */
-const POPOUT_CHANNEL = 'fri3d-ide-vbadge'
-const SHOW_BADGE_EVENT = 'fri3d:vbadge:show'
+const POPOUT_CHANNEL = 'mpos-ide-vdevice'
+const SHOW_BADGE_EVENT = 'mpos-ide:vdevice:show'
 
 /** IDBFS mountpoints double as IndexedDB database names (Emscripten IDBFS). */
 const VBADGE_IDB_NAMES = ['/data', '/apps']
 
-/** True while a virtual badge iframe is alive (its IDBFS would recreate /
+/** Badge footprint per skin (CSS px, badge element + 2px border), used to
+ *  size the inline iframe and pop-out window before the page has loaded
+ *  and its own shrink-wrap/scale-to-fit logic can measure the real DOM.
+ *  Must be kept roughly in sync with the --badge-w-mm/--badge-h-mm * --u
+ *  values in vbadge/index.html so there's no visible jump once it loads. */
+const BADGE_FOOTPRINT: Record<'fri3d-badge-2026' | 'micropythonos', { width: number; height: number }> = {
+    'fri3d-badge-2026': { width: 808, height: 369 },
+    micropythonos: { width: 409, height: 679 },
+}
+
+/** True while a virtual device iframe is alive (its IDBFS would recreate /
  *  rewrite the databases we are trying to delete). */
 export function isVirtualBadgeRunning(): boolean {
     return document.getElementById('virtual-badge-panel') !== null
 }
 
-/** Erase the virtual badge's persistent filesystem (IndexedDB-backed /data
+/** Erase the virtual device's persistent filesystem (IndexedDB-backed /data
  *  and /apps). Next boot re-seeds bundled apps from the wasm preload. */
 export async function resetVirtualBadgeStorage(): Promise<void> {
     if (isVirtualBadgeRunning()) {
-        throw new Error('Disconnect the virtual badge first')
+        throw new Error('Disconnect the virtual device first')
     }
     await Promise.all(
         VBADGE_IDB_NAMES.map(
@@ -104,15 +114,22 @@ export class VirtualBadgeTransport extends Transport {
     declare attach: boolean
     declare popOutDefault: boolean
     declare helloSeen: boolean
+    declare skin: 'fri3d-badge-2026' | 'micropythonos'
 
     /** `attach: true` (after hasOrphanBadgeWindow()) re-attaches to an
      *  already-running popped-out badge window. `popOut: true` skips the
-     *  inline panel and opens the badge in its own window right away. */
-    constructor(pageUrl: string = DEFAULT_PAGE_URL, opts: { attach?: boolean; popOut?: boolean } = {}) {
+     *  inline panel and opens the badge in its own window right away.
+     *  `skin` selects the vbadge page's bezel chrome (defaults to the Fri3d
+     *  Badge 2026 skin, matching the page's own default). */
+    constructor(
+        pageUrl: string = DEFAULT_PAGE_URL,
+        opts: { attach?: boolean; popOut?: boolean; skin?: 'fri3d-badge-2026' | 'micropythonos' } = {},
+    ) {
         super()
         this.pageUrl = pageUrl
         this.attach = opts.attach ?? false
         this.popOutDefault = opts.popOut ?? false
+        this.skin = opts.skin ?? 'fri3d-badge-2026'
         this.helloSeen = false
         this.container = null
         this.iframe = null
@@ -122,6 +139,12 @@ export class VirtualBadgeTransport extends Transport {
         this.popWindow = null
         this.popPong = null
         this.info = { url: pageUrl, virtual: true }
+    }
+
+    /** `pageUrl` with the `skin` query param appended. */
+    private skinnedUrl(extraParams = ''): string {
+        const sep = this.pageUrl.includes('?') ? '&' : '?'
+        return `${this.pageUrl}${sep}skin=${this.skin}${extraParams}`
     }
 
     private badgeWindow(): MposWindow | null {
@@ -215,7 +238,7 @@ export class VirtualBadgeTransport extends Transport {
 
         // Title bar: full-width drag surface with grip dots + hide/show
         // toggle. Neubrutalist styling to match the IDE (square corners,
-        // black border, hard shadow, Fri3d purple).
+        // black border, hard shadow, brand purple).
         const barRow = document.createElement('div')
         Object.assign(barRow.style, {
             display: 'flex',
@@ -226,7 +249,7 @@ export class VirtualBadgeTransport extends Transport {
             margin: '0 0 8px auto',
             padding: '0 8px',
             marginBottom: '8px',
-            background: 'var(--fri3d-purple, #8835c9)',
+            background: 'var(--brand-purple, #8835c9)',
             border: '2px solid #000',
             boxShadow: '4px 4px 0 #000',
             cursor: 'grab',
@@ -264,7 +287,7 @@ export class VirtualBadgeTransport extends Transport {
             fontSize: '12px',
             fontWeight: 'bold',
             color: '#000',
-            background: 'var(--fri3d-mint, #3ce8b3)',
+            background: 'var(--brand-mint, #3ce8b3)',
             border: '2px solid #000',
             cursor: 'pointer',
             userSelect: 'none',
@@ -287,7 +310,7 @@ export class VirtualBadgeTransport extends Transport {
             fontSize: '12px',
             fontWeight: 'bold',
             color: '#000',
-            background: 'var(--fri3d-yellow, #f9c74f)',
+            background: 'var(--brand-yellow, #f9c74f)',
             border: '2px solid #000',
             cursor: 'pointer',
             userSelect: 'none',
@@ -357,14 +380,15 @@ export class VirtualBadgeTransport extends Transport {
         } as Partial<CSSStyleDeclaration>)
 
         const iframe = document.createElement('iframe')
-        iframe.title = 'MicroPythonOS virtual badge'
-        iframe.src = this.pageUrl
+        iframe.title = 'MicroPythonOS virtual device'
+        iframe.src = this.skinnedUrl()
         iframe.setAttribute('allowtransparency', 'true')
+        const footprint = BADGE_FOOTPRINT[this.skin]
         Object.assign(iframe.style, {
-            // Matches badge size in vbadge/index.html (119x54mm @ --u:6.75px/mm
-            // + 2px border) so the load-time shrink-wrap doesn't visibly jump.
-            width: '808px',
-            height: '369px',
+            // Matches the active skin's badge size in vbadge/index.html so the
+            // load-time shrink-wrap below doesn't visibly jump.
+            width: `${footprint.width}px`,
+            height: `${footprint.height}px`,
             border: 'none',
             display: 'block',
             background: 'transparent',
@@ -398,7 +422,7 @@ export class VirtualBadgeTransport extends Transport {
                 },
                 { once: true },
             )
-            iframe.addEventListener('error', () => reject(new Error('Failed to load virtual badge')), {
+            iframe.addEventListener('error', () => reject(new Error('Failed to load virtual device')), {
                 once: true,
             })
         })
@@ -445,7 +469,7 @@ export class VirtualBadgeTransport extends Transport {
         while (!bridge) {
             if (Date.now() > deadline) {
                 this.teardown()
-                throw new Error('Virtual badge bridge not available')
+                throw new Error('Virtual device bridge not available')
             }
             await new Promise((r) => setTimeout(r, 50))
             bridge = this.bridge()
@@ -466,7 +490,7 @@ export class VirtualBadgeTransport extends Transport {
         while (!this.badgeWindow()?.Module?.calledRun) {
             if (Date.now() > bootDeadline) {
                 this.teardown()
-                throw new Error('Virtual badge failed to boot (timeout)')
+                throw new Error('Virtual device failed to boot (timeout)')
             }
             await new Promise((r) => setTimeout(r, 100))
         }
@@ -488,7 +512,7 @@ export class VirtualBadgeTransport extends Transport {
             if (sawOutput && bridge.inq.length === 0) break
             if (Date.now() > bootDeadline) {
                 this.teardown()
-                throw new Error('Virtual badge REPL did not start (timeout)')
+                throw new Error('Virtual device REPL did not start (timeout)')
             }
         }
         // Drop any stray probe CRs still queued and settle.
@@ -510,13 +534,17 @@ export class VirtualBadgeTransport extends Transport {
         this.helloSeen = false
         const chan = this.openChannel(POPOUT_CHANNEL)
 
-        const badgeW = 830
-        const badgeH = 400
+        // A little slack beyond the badge's own footprint for browser
+        // window chrome (title bar etc.); the page's own fitBadge() scales
+        // the badge to whatever viewport it actually gets.
+        const footprint = BADGE_FOOTPRINT[this.skin]
+        const badgeW = footprint.width + 22
+        const badgeH = footprint.height + 31
         // Resolved IDE theme (settings + OS pref), mirrored by initTheme().
         const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'
         const win = window.open(
-            `${this.pageUrl}?popout=1&theme=${theme}`,
-            'fri3d-ide-vbadge',
+            this.skinnedUrl(`&popout=1&theme=${theme}`),
+            'mpos-ide-vdevice',
             `popup=yes,width=${badgeW},height=${badgeH}`,
         )
         if (!win) {
@@ -610,7 +638,7 @@ export class VirtualBadgeTransport extends Transport {
             return
         }
         const bridge = this.bridge()
-        if (!bridge) throw new Error('Virtual badge is not running')
+        if (!bridge) throw new Error('Virtual device is not running')
         bridge.push(data)
     }
 

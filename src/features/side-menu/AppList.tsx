@@ -143,7 +143,7 @@ export function AppList() {
                     <button
                         type="button"
                         data-tour-id="tour-create-app"
-                        className="flex w-full items-center justify-center gap-2 border-2 border-black bg-(--fri3d-purple) px-3 py-2 font-semibold text-white shadow-brutal transition-transform hover:brightness-110 active:translate-x-1 active:translate-y-1 active:shadow-none"
+                        className="flex w-full items-center justify-center gap-2 border-2 border-black bg-(--brand-purple) px-3 py-2 font-semibold text-white shadow-brutal transition-transform hover:brightness-110 active:translate-x-1 active:translate-y-1 active:shadow-none"
                         aria-label={t('apps.create-title', 'Create New App')}
                         onClick={() => void createAppDialog()}
                     >

@@ -59,6 +59,7 @@ export function SettingsPanel() {
     const confirm = useConfirm()
     const zoom = useSettingsStore((s) => s.zoom)
     const colorTheme = useSettingsStore((s) => s.colorTheme)
+    const uiStyle = useSettingsStore((s) => s.uiStyle)
     const set = useSettingsStore((s) => s.set)
 
     return (
@@ -75,7 +76,7 @@ export function SettingsPanel() {
             <div className="title-lines text-xs">{t('settings.conn', 'connection')}</div>            <Toggle id="interruptDevice" label={t('settings.interrupt-device', 'Interrupt device')} />
             <Toggle id="forceSerialPolyfill" label={t('settings.force-serial-poly', 'Force WebSerial polyfill')} />
 
-            <div className="title-lines text-xs">{t('settings.virtual-badge', 'virtual badge')}</div>
+            <div className="title-lines text-xs">{t('settings.virtual-badge', 'virtual device')}</div>
             <Toggle id="vbadgePopOut" label={t('settings.vbadge-popout-default', 'Open in separate window')} />
             <button
                 type="button"
@@ -83,7 +84,7 @@ export function SettingsPanel() {
                     void (async () => {
                         if (isVirtualBadgeRunning()) {
                             toast.error(
-                                t('settings.vbadge-disconnect-first', 'Disconnect the virtual badge first'),
+                                t('settings.vbadge-disconnect-first', 'Disconnect the virtual device first'),
                             )
                             return
                         }
@@ -91,14 +92,14 @@ export function SettingsPanel() {
                             !(await confirm(
                                 t(
                                     'settings.vbadge-reset-confirm',
-                                    'Erase the virtual badge storage? All files and installed apps on the virtual device will be lost.',
+                                    'Erase the virtual device storage? All files and installed apps on the virtual device will be lost.',
                                 ),
                             ))
                         )
                             return
                         try {
                             await resetVirtualBadgeStorage()
-                            toast.success(t('settings.vbadge-reset-done', 'Virtual badge storage erased'))
+                            toast.success(t('settings.vbadge-reset-done', 'Virtual device storage erased'))
                         } catch (err) {
                             toast.error(t('settings.vbadge-reset-failed', 'Reset failed'), {
                                 description: String(err),
@@ -109,7 +110,7 @@ export function SettingsPanel() {
                 className="mt-1 flex items-center gap-2 border-2 border-black bg-transparent px-3 py-1.5 text-sm font-semibold text-fg transition-colors hover:bg-black/10 dark:hover:bg-white/10"
             >
                 <RotateCcw size={15} aria-hidden />
-                {t('settings.vbadge-reset', 'Reset virtual badge')}
+                {t('settings.vbadge-reset', 'Reset virtual device')}
             </button>
 
             <div className="title-lines text-xs">{t('settings.editor', 'editor')}</div>
@@ -150,6 +151,15 @@ export function SettingsPanel() {
                     { value: 'dark', label: t('settings.theme-dark', 'Dark') },
                 ]}
                 onChange={(v) => set('colorTheme', v)}
+            />
+            <Select
+                label={t('settings.ui-style', 'Look:')}
+                value={uiStyle}
+                options={[
+                    { value: 'fri3d', label: t('settings.ui-style-fri3d', 'Fri3d (classic)') },
+                    { value: 'micropythonos', label: t('settings.ui-style-micropythonos', 'MicroPythonOS (generic)') },
+                ]}
+                onChange={(v) => set('uiStyle', v)}
             />
             <Toggle id="naturalSort" label={t('settings.use-natural-sort', 'Use natural sorting')} />
 

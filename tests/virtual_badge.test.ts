@@ -6,7 +6,7 @@ describe('VirtualBadgeTransport display controls', () => {
         const transport = new VirtualBadgeTransport('/vbadge/')
         const container = document.createElement('div')
         const shown = vi.fn()
-        container.addEventListener('fri3d:vbadge:show', shown)
+        container.addEventListener('mpos-ide:vdevice:show', shown)
         transport.container = container
 
         transport.showBadge()
@@ -24,3 +24,29 @@ describe('VirtualBadgeTransport display controls', () => {
         expect(focus).toHaveBeenCalledOnce()
     })
 })
+
+describe('VirtualBadgeTransport skin selection', () => {
+    it('defaults to the Fri3d Badge 2026 skin', () => {
+        const transport = new VirtualBadgeTransport('/vbadge/index.html') as unknown as {
+            skinnedUrl(extra?: string): string
+        }
+        expect(transport.skinnedUrl()).toBe('/vbadge/index.html?skin=fri3d-badge-2026')
+    })
+
+    it('passes the generic MicroPythonOS skin through as a query param', () => {
+        const transport = new VirtualBadgeTransport('/vbadge/index.html', {
+            skin: 'micropythonos',
+        }) as unknown as { skinnedUrl(extra?: string): string }
+        expect(transport.skinnedUrl()).toBe('/vbadge/index.html?skin=micropythonos')
+    })
+
+    it('appends extra params after the skin param', () => {
+        const transport = new VirtualBadgeTransport('/vbadge/index.html', {
+            skin: 'micropythonos',
+        }) as unknown as { skinnedUrl(extra?: string): string }
+        expect(transport.skinnedUrl('&popout=1&theme=dark')).toBe(
+            '/vbadge/index.html?skin=micropythonos&popout=1&theme=dark',
+        )
+    })
+})
+

@@ -13,14 +13,14 @@
             "save-run": "Save & Run",
             "stop": "Stop",
             "fullscreen": "Full Screen",
-            "install-app": "Install Fri3d-IDE as app",
+            "install-app": "Install MicroPythonOS IDE as app",
             "clear": "Clear",
             "conn": {
                 "ws": "Connect WebREPL",
                 "ble": "Connect Bluetooth",
                 "usb": "Connect USB/Serial",
-                "vm": "Connect to virtual badge",
-                "vm-short": "Virtual badge"
+                "vm": "Connect to virtual device",
+                "vm-short": "Virtual device"
             },
             "terminal": "Terminal",
             "display": "Display",
@@ -142,6 +142,9 @@
             "lang": "Localization",
             "zoom": "Zoom",
             "color-theme": "Theme",
+            "ui-style": "Look",
+            "ui-style-fri3d": "Fri3d (classic)",
+            "ui-style-micropythonos": "MicroPythonOS (generic)",
             "help": "help",
             "restart-tour": "Open welcome tab",
             "advanced-mode": "Advanced mode",
@@ -149,32 +152,39 @@
             "theme-system": "System",
             "theme-light": "Light",
             "theme-dark": "Dark",
-            "virtual-badge": "virtual badge",
-            "vbadge-reset": "Reset virtual badge",
-            "vbadge-reset-confirm": "Erase the virtual badge storage? All files and installed apps on the virtual device will be lost.",
-            "vbadge-reset-done": "Virtual badge storage erased",
+            "virtual-badge": "virtual device",
+            "vbadge-reset": "Reset virtual device",
+            "vbadge-reset-confirm": "Erase the virtual device storage? All files and installed apps on the virtual device will be lost.",
+            "vbadge-reset-done": "Virtual device storage erased",
             "vbadge-reset-failed": "Reset failed",
-            "vbadge-disconnect-first": "Disconnect the virtual badge first",
+            "vbadge-disconnect-first": "Disconnect the virtual device first",
             "vbadge-popout-default": "Open in separate window"
         },
         "about": {
             "changelog": "What's new",
-            "cta": "If you like Fri3d-IDE, please give it a GitHub star ⭐ and spread the word on social media 📢",
+            "cta": "If you like MicroPythonOS IDE, please give it a GitHub star ⭐ and spread the word on social media 📢",
             "report-bug": "You can also report a bug 🐞",
             "by": "by",
-            "cta-pre": "If you like Fri3d-IDE, please",
+            "cta-pre": "If you like MicroPythonOS IDE, please",
             "cta-star": "give it a GitHub star",
             "copy-diagnostics": "Copy diagnostics",
             "diagnostics-copied": "Diagnostics copied",
             "diagnostics-failed": "Could not copy diagnostics"
         },
         "welcome": {
-            "title": "Welcome to Fri3d-IDE",
-            "subtitle": "MicroPython IDE for the Fri3d Camp 2026 badge.",
+            "title": "Welcome to MicroPythonOS IDE",
+            "subtitle": "MicroPython IDE for MicroPythonOS devices, including the Fri3d Camp badge.",
             "tours-title": "Guided tours",
             "tours-text": "Step-by-step tours that walk you through the IDE.",
             "or-connect": "Or skip the tours and connect directly:",
-            "whats-new": "What's new in v{{version}}"
+            "whats-new": "What's new in v{{version}}",
+            "device-workspace": "Device workspace",
+            "device-workspace-hint": "Choose which virtual device to run — switch anytime."
+        },
+        "device-kind": {
+            "generic-micropython": "Generic MicroPython",
+            "micropythonos": "MicroPythonOS",
+            "fri3d-badge-2026": "Fri3d Badge 2026"
         },
         "onboarding": {
             "step": "Step {{current}} of {{total}}",
@@ -183,23 +193,23 @@
             "next": "Next",
             "continue-on-action": "Complete the highlighted action to continue",
             "get-started": "Continue to IDE",
-            "task-connect": "Connect my badge",
-            "task-connect-detail": "Use USB to connect a physical Fri3d badge.",
-            "task-virtual": "Try the virtual badge",
+            "task-connect": "Connect my device",
+            "task-connect-detail": "Use USB to connect a physical device.",
+            "task-virtual": "Try the virtual device",
             "task-virtual-detail": "Explore MicroPythonOS without hardware.",
             "task-build": "Build my first app",
             "task-build-detail": "Create an app with a step-by-step coding guide beside the editor.",
             "task-badgehub": "Install an app from BadgeHub",
-            "task-badgehub-detail": "Browse and install a compatible badge app.",
+            "task-badgehub-detail": "Browse and install a compatible app.",
             "target-build-title": "Where should the app run?",
             "target-badgehub-title": "Where should the app be installed?",
-            "target-text": "Choose a physical Fri3d badge or the virtual badge.",
-            "target-real": "Real Fri3d badge",
-            "target-real-detail": "Connect over USB and use the physical badge.",
-            "target-virtual": "Virtual badge",
+            "target-text": "Choose a physical device or the virtual device.",
+            "target-real": "Real device",
+            "target-real-detail": "Connect over USB and use the physical device.",
+            "target-virtual": "Virtual device",
             "target-virtual-detail": "Run it in the browser without hardware.",
-            "connecting-real": "Connecting your badge…",
-            "connecting-virtual": "Starting the virtual badge…",
+            "connecting-real": "Connecting your device…",
+            "connecting-virtual": "Starting the virtual device…",
             "connecting-wait": "Complete any browser permission prompt to continue.",
             "create-first-title": "Create your starter app",
             "create-first-text": "Click Create New App. The guide continues as soon as the dialog opens.",
@@ -209,10 +219,10 @@
             "badgehub-text": "Click Browse BadgeHub. The guide continues as soon as the store opens.",
             "browse-badgehub-title": "Choose and install an app",
             "browse-badgehub-text": "Search or browse for an app, then click Install. The tour continues after installation.",
-            "success-connect-title": "Badge connected!",
-            "success-connect": "Your physical badge is ready for files, apps, and the terminal.",
-            "success-virtual-title": "Virtual badge running!",
-            "success-virtual": "You can now experiment without changing a physical badge.",
+            "success-connect-title": "Device connected!",
+            "success-connect": "Your physical device is ready for files, apps, and the terminal.",
+            "success-virtual-title": "Virtual device running!",
+            "success-virtual": "You can now experiment without changing a physical device.",
             "success-build-title": "Your first app is ready!",
             "success-build": "You created an app and opened its code. Keep experimenting, then launch it from Apps.",
             "success-badgehub-title": "BadgeHub is ready!",
@@ -220,11 +230,11 @@
             "steps": {
                 "connection": {
                     "title": "You are connected",
-                    "text": "This shows your connection status: the badge name and a blinking activity dot. Disconnect here; reconnect any time with the Connect button that appears in its place."
+                    "text": "This shows your connection status: the device name and a blinking activity dot. Disconnect here; reconnect any time with the Connect button that appears in its place."
                 },
                 "apps": {
                     "title": "Your apps",
-                    "text": "The Apps tab lists every app installed on the badge. Click an app to open its details — and “Create New App” scaffolds a fresh one from a template."
+                    "text": "The Apps tab lists every app installed on the device. Click an app to open its details — and “Create New App” scaffolds a fresh one from a template."
                 },
                 "open-app": {
                     "title": "Inside an app",
@@ -232,7 +242,7 @@
                 },
                 "launch": {
                     "title": "Launch the app",
-                    "text": "The 🚀 Launch app button starts the app on the badge, exactly like picking it from the badge menu."
+                    "text": "The 🚀 Launch app button starts the app on the device, exactly like picking it from the device menu."
                 },
                 "launch-toolbar": {
                     "title": "Launch while editing",
@@ -240,20 +250,20 @@
                 },
                 "terminal": {
                     "title": "Terminal",
-                    "text": "All output from your badge appears here. It is also a live MicroPython REPL: click it and type Python directly on the device."
+                    "text": "All output from your device appears here. It is also a live MicroPython REPL: click it and type Python directly on the device."
                 },
                 "files": {
                     "title": "File browser — plain MicroPython",
-                    "text": "Prefer working without the app structure? The File Manager shows every file on the badge. Open any .py file and run it directly — regular MicroPython, no packaging needed."
+                    "text": "Prefer working without the app structure? The File Manager shows every file on the device. Open any .py file and run it directly — regular MicroPython, no packaging needed."
                 },
                 "save-run": {
                     "title": "Save & Run safely",
-                    "text": "Use Save & Run to write your changes to badge storage and execute them. The separate Save (Ctrl/Cmd+S) and Run (F5) commands remain available; Run alone does not save changes."
+                    "text": "Use Save & Run to write your changes to device storage and execute them. The separate Save (Ctrl/Cmd+S) and Run (F5) commands remain available; Run alone does not save changes."
                 },
                 "done": {
                     "title": "You're all set! 🚀",
-                    "text": "That was the tour! Your badge is connected and ready. Start building amazing things. Happy coding!",
-                    "text-demo": "That was the tour! The demo device will now disconnect — plug in your Fri3d badge with a USB-C cable and start building. Happy coding!"
+                    "text": "That was the tour! Your device is connected and ready. Start building amazing things. Happy coding!",
+                    "text-demo": "That was the tour! The demo device will now disconnect — plug in your device with a USB-C cable and start building. Happy coding!"
                 }
             }
         },
@@ -285,7 +295,7 @@
                 "random": "MicroPython random numbers"
             },
             "virtual-controls": {
-                "title": "Keep the virtual badge out of your way",
+                "title": "Keep the virtual device out of your way",
                 "move": "Move it by dragging the purple handle.",
                 "popout": "Click ⧉ to open it in a separate window.",
                 "minimize": "Click ▾ to minimize it to the handle. Running a checkpoint restores it automatically."
@@ -295,7 +305,7 @@
             "copied": "Copied",
             "checking": "Checking and launching…",
             "check-launch": "Check, save & launch",
-            "check-success": "Code looks good. App was saved and launched—check it on your badge.",
+            "check-success": "Code looks good. App was saved and launched—check it on your device.",
             "back": "Previous",
             "next": "Next feature",
             "finish": "Finish",
@@ -303,7 +313,7 @@
                 "start": {
                     "title": "Run the starter app",
                     "instruction": "Your new main.py is open in the editor on the right. Start by checking the untouched app and seeing it run.",
-                    "goal": "A centered Hello World message appears on the badge."
+                    "goal": "A centered Hello World message appears on the device."
                 },
                 "greeting": {
                     "title": "Make the greeting yours",
@@ -327,12 +337,12 @@
                 },
                 "joystick": {
                     "title": "Steer with the joystick",
-                    "instruction": "Time to turn this into a game! Add this code below the progress bar code and above self.setContentView(screen). It creates a little ship you steer with the badge joystick. On the virtual badge, drag the joystick to steer.",
+                    "instruction": "Time to turn this into a game! Add this code below the progress bar code and above self.setContentView(screen). It creates a little ship you steer with the joystick. On the virtual device, drag the joystick to steer.",
                     "goal": "A small ship appears and flies around when you move the joystick."
                 },
                 "game": {
                     "title": "Catch the spark!",
-                    "instruction": "The finale: a real game. Replace everything from def on_key down to screen.add_event_cb(on_key, lv.EVENT.KEY, None) with the code below. It hides the tap button (its job is done), drops a spark at a random spot, and teaches on_key one more trick: press the A button (Enter on the virtual badge) while your ship is close to catch the spark. Every catch fills the bar.",
+                    "instruction": "The finale: a real game. Replace everything from def on_key down to screen.add_event_cb(on_key, lv.EVENT.KEY, None) with the code below. It hides the tap button (its job is done), drops a spark at a random spot, and teaches on_key one more trick: press the A button (Enter on the virtual device) while your ship is close to catch the spark. Every catch fills the bar.",
                     "goal": "Catch 10 sparks to fill the bar and win the game."
                 }
             },
@@ -417,7 +427,7 @@
             "err-conn-type": "Unknown connection type",
             "device-disconnected": "Device disconnected",
             "device-connected": "Device connected",
-            "update-available": "New Fri3d-IDE version {{version}} is available",
+            "update-available": "New MicroPythonOS IDE version {{version}} is available",
             "connecting": "Connecting…",
             "cannot-connect": "Cannot connect",
             "reading-device": "Reading device…",
@@ -427,7 +437,7 @@
             "disconnect-device": "Disconnect device",
             "disconnect": "Disconnect",
             "connect-device": "Connect device",
-            "vbadge-disclaimer": "The virtual badge is a preview of what the real Fri3d badge can do. It runs the same MicroPythonOS, but not everything works the same: hardware like WiFi, sensors and sound is missing or behaves differently, and timing/performance differ from the real device."
+            "vbadge-disclaimer": "The virtual device is a preview of what real MicroPythonOS hardware can do. It runs the same MicroPythonOS, but not everything works the same: hardware like WiFi, sensors and sound is missing or behaves differently, and timing/performance differ from the real device."
         },
         "pkg": {
             "installing": "Installing {{pkg}}…",
@@ -533,6 +543,7 @@
             "template-progress": "Progress bar",
             "template-settings": "Settings demo",
             "template-blank": "Blank",
+            "template-needs-mpos": "This template uses the mpos UI toolkit and needs MicroPythonOS — it may not run on plain MicroPython.",
             "icon-reset": "Reset",
             "icon-bg": "Background",
             "icon-bg-choice": "Icon background {{name}}",
@@ -603,7 +614,7 @@
             "sort-name": "App name",
             "status": "Status",
             "status-all": "All statuses",
-            "incompatible": "Not for this badge",
+            "incompatible": "Not for this device",
             "install-failed": "Install failed",
             "no-mpk": "This project has no installable .mpk file",
             "downloading": "Downloading {{name}}…"
