@@ -34,6 +34,11 @@
     --raw-hex-hex: #f8f8f2;
     --raw-hex-ascii: #e6db74;
 
+    /* [data-ui-style] tokens: border color and corner radius used by the
+       generic-theme utility overrides further down this file. */
+    --raw-border-color: #000000;
+    --raw-radius-btn: 0px;
+
     color-scheme: dark;
 }
 
@@ -60,6 +65,89 @@
     --raw-hex-ascii: #7c5800;
 
     color-scheme: light;
+}
+
+/*
+ * UI style (settings.uiStyle): a manual, user-chosen visual skin, independent
+ * from [data-theme] (light/dark) and from the connected/selected device kind.
+ * "fri3d" (default) is the existing neobrutalist look defined above; adds
+ * a softer, more neutral "micropythonos" alternative.
+ */
+:root[data-ui-style="micropythonos"] {
+    --brand-purple: #2f6fed;
+    --brand-orange: #22c1a0;
+    --brand-mint: #4c8dff;
+
+    --raw-fg: #e6edf3;
+    --raw-fg-highlight: #4dd0e1;
+    --raw-bg: #10151b;
+    --raw-bg-menu: #161c24;
+    --raw-bg-edit: #0b0f14;
+    --raw-accent: #2f6fed;
+    --raw-accent-secondary: #22c1a0;
+    --raw-cta: #2f6fed;
+    --raw-cta-fg: #ffffff;
+    --raw-toolbar-bg: #161c24;
+    --raw-toolbar-border: #2a333d;
+    --raw-tab-active-bg: #2f6fed;
+    --raw-tab-active-fg: #ffffff;
+    --raw-connected-passive: #22c1a0;
+    --raw-connected-active: #4dd0e1;
+
+    --raw-border-color: #2a333d;
+    --raw-radius-btn: 0.6rem;
+}
+
+:root[data-ui-style="micropythonos"][data-theme="light"] {
+    --raw-fg: #10151b;
+    --raw-fg-highlight: #2f6fed;
+    --raw-bg: #eef2f6;
+    --raw-bg-menu: #ffffff;
+    --raw-bg-edit: #ffffff;
+    --raw-accent: #2f6fed;
+    --raw-accent-secondary: #1f9d84;
+    --raw-cta: #2f6fed;
+    --raw-cta-fg: #ffffff;
+    --raw-toolbar-bg: #ffffff;
+    --raw-toolbar-border: #d7dee6;
+    --raw-tab-active-bg: #2f6fed;
+    --raw-tab-active-fg: #ffffff;
+    --raw-connected-passive: #1f9d84;
+    --raw-connected-active: #2f6fed;
+
+    --raw-border-color: #d7dee6;
+}
+
+/*
+ * Tailwind v4 bakes @theme values into the compiled utility CSS at build
+ * time, so shadow/font tokens can't be re-themed via a plain :root variable
+ * override the way color tokens (referenced with var()) can. Override the
+ * compiled utility classes directly instead, still scoped to [data-ui-style].
+ */
+[data-ui-style="micropythonos"] :is(.shadow-brutal, .shadow-brutal\!) {
+    box-shadow: 0 2px 6px rgba(15, 23, 32, 0.35);
+}
+[data-ui-style="micropythonos"] .shadow-brutal-lg {
+    box-shadow: 0 6px 20px rgba(15, 23, 32, 0.4);
+}
+[data-ui-style="micropythonos"][data-theme="light"] :is(.shadow-brutal, .shadow-brutal\!) {
+    box-shadow: 0 1px 4px rgba(15, 23, 32, 0.15);
+}
+[data-ui-style="micropythonos"][data-theme="light"] .shadow-brutal-lg {
+    box-shadow: 0 4px 14px rgba(15, 23, 32, 0.18);
+}
+[data-ui-style="micropythonos"] .font-heading {
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* Soften hard black borders and square corners app-wide for the generic style,
+   without touching every component's classNames (Tailwind utilities are just
+   CSS classes, so a higher-specificity attribute-scoped override works). */
+[data-ui-style="micropythonos"] :is(.border-black, .border-t-black, .border-b-black, .border-l-black, .border-r-black) {
+    border-color: var(--raw-border-color);
+}
+[data-ui-style="micropythonos"] :is(.border-2, .border-3, .rounded-none) {
+    border-radius: var(--raw-radius-btn);
 }
 
 @theme inline {

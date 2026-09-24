@@ -18,6 +18,11 @@ All notable user-facing changes to MicroPythonOS IDE (formerly Fri3d-IDE).
   detects whether it runs plain MicroPython, MicroPythonOS, or is
   specifically a Fri3d Camp 2026 badge, and scopes app templates and
   documentation links accordingly.
+- **UI style setting** — a new "Look" setting lets you switch the IDE's own
+  visual style between the classic Fri3d neobrutalist look and a softer,
+  generic MicroPythonOS look (colors, borders, shadows, and button/dialog
+  corner radius). This is a manual choice in Settings, independent of the
+  device workspace and color theme (light/dark).
 
 ## v1.2.4 — 2026-08-14
 

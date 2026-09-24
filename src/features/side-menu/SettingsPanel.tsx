@@ -59,6 +59,7 @@ export function SettingsPanel() {
     const confirm = useConfirm()
     const zoom = useSettingsStore((s) => s.zoom)
     const colorTheme = useSettingsStore((s) => s.colorTheme)
+    const uiStyle = useSettingsStore((s) => s.uiStyle)
     const set = useSettingsStore((s) => s.set)
 
     return (
@@ -150,6 +151,15 @@ export function SettingsPanel() {
                     { value: 'dark', label: t('settings.theme-dark', 'Dark') },
                 ]}
                 onChange={(v) => set('colorTheme', v)}
+            />
+            <Select
+                label={t('settings.ui-style', 'Look:')}
+                value={uiStyle}
+                options={[
+                    { value: 'fri3d', label: t('settings.ui-style-fri3d', 'Fri3d (classic)') },
+                    { value: 'micropythonos', label: t('settings.ui-style-micropythonos', 'MicroPythonOS (generic)') },
+                ]}
+                onChange={(v) => set('uiStyle', v)}
             />
             <Toggle id="naturalSort" label={t('settings.use-natural-sort', 'Use natural sorting')} />
 
