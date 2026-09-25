@@ -33,7 +33,7 @@ const DEFAULTS: Settings = {
     preferSource: false,
     zoom: 1.0,
     colorTheme: 'system',
-    uiStyle: 'fri3d',
+    uiStyle: 'micropythonos',
     naturalSort: true,
     sideMenuWidth: 300,
 }
